@@ -18,13 +18,8 @@
         <p class="sec-sub">Semua informasi dan layanan sekolah kini mudah diakses secara digital oleh siswa, orang tua, dan masyarakat.</p>
     </div>
     <div class="smart-grid">
-        <div class="sc reveal d1"><div class="sc-ic sci1">📊</div><div class="sc-title">Portal Nilai</div><div class="sc-desc">Cek rapor & akademik real-time</div></div>
         <div class="sc reveal d2"><div class="sc-ic sci2">📋</div><div class="sc-title">PPDB Online</div><div class="sc-desc">Daftar siswa baru online</div></div>
-        <div class="sc reveal d3"><div class="sc-ic sci3">📅</div><div class="sc-title">Jadwal</div><div class="sc-desc">Jadwal harian & mingguan</div></div>
         <div class="sc reveal d4"><div class="sc-ic sci4">📢</div><div class="sc-title">Pengumuman</div><div class="sc-desc">Info & pengumuman terkini</div></div>
-        <div class="sc reveal d1"><div class="sc-ic sci5">💳</div><div class="sc-title">Bayar SPP</div><div class="sc-desc">Status & riwayat pembayaran</div></div>
-        <div class="sc reveal d2"><div class="sc-ic sci6">📚</div><div class="sc-title">E-Library</div><div class="sc-desc">Buku digital tersedia online</div></div>
-        <div class="sc reveal d3"><div class="sc-ic sci7">✅</div><div class="sc-title">Absensi</div><div class="sc-desc">Rekapitulasi kehadiran harian</div></div>
         <div class="sc reveal d4"><div class="sc-ic sci8">💬</div><div class="sc-title">Konsultasi</div><div class="sc-desc">Tanya jawab dengan guru</div></div>
     </div>
     </div>

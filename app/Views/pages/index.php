@@ -78,15 +78,22 @@
         <div class="vm-list">
         <div class="vm-card">
             <div class="vm-head"><span style="font-size:20px">🌟</span><span class="vm-lbl">Visi</span></div>
-            <p class="vm-txt">Terwujudnya sekolah unggul dalam prestasi, berkarakter Pancasila, dan berwawasan lingkungan yang relevan dengan kebutuhan global.</p>
+            <p class="vm-txt">Terwujudnya Siswa yang Berakhlak Mulia, Berprestasi, Kreatif, dan Berwawasan Global.</p>
         </div>
         <div class="vm-card">
             <div class="vm-head"><span style="font-size:20px">🎯</span><span class="vm-lbl">Misi</span></div>
-            <p class="vm-txt">Melaksanakan pembelajaran inovatif berbasis teknologi, membina akhlak mulia, dan mengembangkan potensi siswa secara holistik.</p>
-        </div>
-        <div class="vm-card" style="border-left-color:var(--gold);background:#FFF8E1">
-            <div class="vm-head"><span style="font-size:20px">🧭</span><span class="vm-lbl" style="color:var(--gold2)">Motto</span></div>
-            <p class="vm-txt" style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--c1);font-style:italic">"Cerdas, Berkarakter, Berprestasi"</p>
+            <p class="vm-txt">
+            1. Menghayati ajaran agama yang dianut dan budaya bangsa sehingga menjadi sumber kearifan dalam bertindak serta mempertebal keimanan dan ketaqwaan.<br>
+            2. Meningkatkan kompetensi tenaga pendidik dan kependidikan dalam mengolah pembelajaran menjadi sistem teknologi cyber di abad 21.<br>
+            3. Membekali peserta didik dengan IMTAQ dan IPTEQ agar mampu bersaing dan melanjutkan ke jenjang pendidikan yang lebih tinggi.<br>
+            4. Meningkatkan pembelajaran berbasis ICT dengan improvisasi serta siap bersaing di abad 21.<br>
+            5. Mewujudkan dan meningkatkan kualitas akademi peserta didik yang memiliki kompetensi abad 21.<br>
+            6. Menumbuhkan semangat keunggulan warga sekolah dalam bersaing di abad 21.<br>
+            7. Meningkatkan hasil lulusan yang mampu bersaing di era revolusi 4.0.<br>
+            8. Meningkatkan kebersihan, keindahan, kerindangan, dan kenyamanan di lingkungan sekolah.<br>
+            9. Menumbuh kembangkan jiwa entrepreneurship peserta didik.<br>
+            10. Mengoptimalkan pelaksanaan 9K dengan memperdayakan potensi yang ada di lingkungan sekolah.
+            </p>
         </div>
         </div>
     </div>

@@ -20,9 +20,6 @@
         <li><a href="<?= base_url('kontak') ?>"   class="<?= $segment === 'kontak'  ? 'active' : '' ?>">Kontak</a></li>
     </ul>
     <div class="nav-right">
-        <button class="notif-btn" onclick="openSheet()" aria-label="Notifikasi">
-        🔔<div class="notif-dot"></div>
-        </button>
         <a href="<?= base_url('ppdb') ?>" class="btn-daftar">✏️ Daftar PPDB →</a>
         <button class="hamburger" id="ham" aria-label="Buka menu">
             <span></span><span></span><span></span>

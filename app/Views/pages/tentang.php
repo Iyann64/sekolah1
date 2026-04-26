@@ -43,10 +43,6 @@
             10. Mengoptimalkan pelaksanaan 9K dengan memperdayakan potensi yang ada di lingkungan sekolah.
             </p>
         </div>
-        <div class="vm-card" style="border-left-color:var(--gold);background:#FFF8E1">
-            <div class="vm-head"><span style="font-size:20px">🧭</span><span class="vm-lbl" style="color:var(--gold2)">Motto</span></div>
-            <p class="vm-txt" style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--c1);font-style:italic">"Cerdas, Berkarakter, Berprestasi"</p>
-        </div>
         </div>
     </div>
     </section>

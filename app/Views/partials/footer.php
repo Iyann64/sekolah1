@@ -27,21 +27,26 @@
         <h4>Layanan</h4>
         <ul>
             <li><a href="<?= base_url('ppdb') ?>">PPDB Online</a></li>
-            <li><a href="#">Portal Siswa</a></li>
-            <li><a href="#">E-Rapor</a></li>
-            <li><a href="#">E-Perpustakaan</a></li>
-            <li><a href="#">Absensi Online</a></li>
         </ul>
         </div>
         <div>
         <h4>Informasi</h4>
         <ul>
             <li><a href="#">Kalender Akademik</a></li>
-            <li><a href="#">Jadwal Pelajaran</a></li>
             <li><a href="#">Prestasi Sekolah</a></li>
             <li><a href="#">Pengumuman</a></li>
             <li><a href="#">Kebijakan Privasi</a></li>
         </ul>
+        </div>
+        <div>
+        <h4>Lokasi</h4>
+        <p style="font-size: 14px; line-height: 1.6;">
+            📍 Jl. Pendidikan No. 56<br>
+            Prabumulih, Sumsel 31124
+        </p>
+        <a href="https://maps.google.com/?q=SD+Negeri+56+Prabumulih" target="_blank" style="display: inline-block; margin-top: 8px; padding: 8px 12px; background-color: #4285F4; color: white; text-decoration: none; border-radius: 4px; font-size: 13px;">
+            Buka di Google Maps
+        </a>
         </div>
     </div>
     <div class="footer-bottom">
