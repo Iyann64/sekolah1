@@ -46,11 +46,13 @@
         $icons  = ['Prestasi'=>'🏆','Kegiatan'=>'🎉','Akademik'=>'📚','Lingkungan'=>'🌿','Seni Budaya'=>'🎨','Olahraga'=>'⚽'];
         $colors = ['Prestasi'=>'linear-gradient(135deg,#004D40,#00695C)','Kegiatan'=>'linear-gradient(135deg,#0D47A1,#1565C0)','Akademik'=>'linear-gradient(135deg,#4A148C,#6A1B9A)','Lingkungan'=>'linear-gradient(135deg,#1B5E20,#2E7D32)','Seni Budaya'=>'linear-gradient(135deg,#E65100,#EF6C00)','Olahraga'=>'linear-gradient(135deg,#B71C1C,#C62828)'];
         $first  = array_shift($berita);
+        $firstThumb = $first['thumbnail'] ? $upload_url . $first['thumbnail'] : null;
+        $firstBg    = $firstThumb ? "url('$firstThumb') center/cover" : ($colors[$first['kategori']] ?? 'var(--c1)');
     ?>
 
     <!-- ── Berita Utama ───────────────────── -->
     <a href="<?= base_url('berita/'.$first['slug']) ?>" class="news-featured reveal">
-        <div class="nf-thumb"><?= $icons[$first['kategori']] ?? '📰' ?></div>
+        <div class="nf-thumb" style="background:<?= $firstBg ?>"><?= !$firstThumb ? ($icons[$first['kategori']] ?? '📰') : '' ?></div>
         <div class="nf-body">
         <div class="nf-cat">📌 <?= esc($first['kategori']) ?></div>
         <div class="nf-title"><?= esc($first['judul']) ?></div>
@@ -74,7 +76,7 @@
         <a href="<?= base_url('berita/'.$b['slug']) ?>"
         class="berita-card reveal <?= $i > 0 ? 'd'.min($i,4) : '' ?>">
         <!-- Thumbnail -->
-        <div class="bc-thumb" style="background:<?= $b['thumbnail'] ? "url('".base_url('uploads/'.$b['thumbnail'])."') center/cover" : $bg ?>">
+        <div class="bc-thumb" style="background:<?= $b['thumbnail'] ? "url('".$upload_url . $b['thumbnail']."') center/cover" : $bg ?>">
             <?php if (!$b['thumbnail']): ?>
             <span class="bc-thumb-ic"><?= $ic ?></span>
             <?php endif; ?>

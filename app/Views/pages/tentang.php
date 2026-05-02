@@ -14,7 +14,7 @@
     <section class="about" id="profil">
     <div class="about-visual reveal">
         <div class="av-bg">
-        <img class="av-logo" src="<?= base_url('images/logo.png') ?>" alt="Logo <?= esc($site_name) ?>">
+        <img class="av-logo" src="<?= $logo_url ?>" alt="Logo <?= esc($site_name) ?>">
         </div>
         <div class="av-badge"><div class="avb-n">A+</div><div class="avb-t">Akreditasi BAN-S/M</div></div>
         <div class="av-badge2"><div class="avb2-n">25+</div><div class="avb2-t">Tahun Berdiri</div></div>
@@ -107,9 +107,13 @@
         $gaColors = ['ga1','ga2','ga3','ga4','ga5'];
         if (!empty($guru_list)):
         foreach ($guru_list as $i => $g):
+            $isImage = (str_contains($g['avatar'], '.') || str_contains($g['avatar'], '/'));
+            $avStyle = $isImage ? "background:url('".$upload_url . $g['avatar']."') center/cover; font-size:0;" : "";
         ?>
         <div class="guru-card reveal <?= $i > 0 ? 'd'.min($i,4) : '' ?>">
-        <div class="gc-av <?= $gaColors[$i % 5] ?>"><?= esc($g['avatar']) ?></div>
+        <div class="gc-av <?= $gaColors[$i % 5] ?>" style="<?= $avStyle ?>">
+            <?= $isImage ? '' : esc($g['avatar']) ?>
+        </div>
         <div class="gc-info">
             <div class="gc-name"><?= esc($g['nama']) ?></div>
             <div class="gc-role"><?= esc($g['jabatan']) ?></div>

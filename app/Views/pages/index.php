@@ -1,3 +1,4 @@
+    
     <!-- ════════ HERO ════════ -->
     <section class="hero" id="beranda">
     <div class="hero-grid"></div>
@@ -26,7 +27,7 @@
             </div>
         </div>
         <div class="hero-logo-ring">
-            <img src="<?= base_url('images/logo.png') ?>" alt="Logo SDN 56">
+            <img src="<?= $logo_url ?>" alt="Logo SDN 56">
         </div>
         <div class="hc-name">SD Negeri 56</div>
         <div class="hc-loc">📍 Prabumulih, Sumsel</div>
@@ -66,7 +67,7 @@
     <section class="about" id="tentang">
     <div class="about-visual reveal">
         <div class="av-bg">
-        <img class="av-logo" src="<?= base_url('images/logo.png') ?>" alt="Logo SDN 56">
+        <img class="av-logo" src="<?= $logo_url ?>" alt="Logo SDN 56">
         </div>
         <div class="av-badge"><div class="avb-n">A+</div><div class="avb-t">Akreditasi BAN-S/M</div></div>
         <div class="av-badge2"><div class="avb2-n">25+</div><div class="avb2-t">Tahun Berdiri</div></div>
@@ -153,9 +154,14 @@
     <div class="berita-layout">
         <div>
         <!-- Featured news — dinamis dari DB, fallback statis -->
-        <?php if (!empty($berita_terbaru)): $f = $berita_terbaru[0]; ?>
+        <?php if (!empty($berita_terbaru)): 
+            $f = $berita_terbaru[0]; 
+            $fThumb = $f['thumbnail'] ? $upload_url . $f['thumbnail'] : null;
+        ?>
         <a href="<?= base_url('berita/'.$f['slug']) ?>" class="news-featured reveal" style="text-decoration:none">
-            <div class="nf-thumb">🏅</div>
+            <div class="nf-thumb" style="<?= $fThumb ? "background:url('$fThumb') center/cover" : '' ?>">
+                <?= !$fThumb ? '🏅' : '' ?>
+            </div>
             <div class="nf-body">
             <div class="nf-cat">📌 <?= esc($f['kategori']) ?></div>
             <div class="nf-title"><?= esc($f['judul']) ?></div>
@@ -164,9 +170,13 @@
             </div>
         </a>
         <div class="news-list reveal d1">
-            <?php foreach (array_slice($berita_terbaru, 1) as $b): ?>
+            <?php foreach (array_slice($berita_terbaru, 1) as $b): 
+                $bThumb = $b['thumbnail'] ? $upload_url . $b['thumbnail'] : null;
+            ?>
             <a href="<?= base_url('berita/'.$b['slug']) ?>" class="nl-item" style="text-decoration:none">
-            <div class="nl-thumb">📰</div>
+            <div class="nl-thumb" style="<?= $bThumb ? "background:url('$bThumb') center/cover" : '' ?>">
+                <?= !$bThumb ? '📰' : '' ?>
+            </div>
             <div>
                 <div class="nl-title"><?= esc($b['judul']) ?></div>
                 <div class="nl-date">📅 <?= date('d F Y', strtotime($b['tanggal'])) ?></div>
@@ -240,19 +250,19 @@
         <h2 class="sec-title">Momen <em style="color:var(--c3)">Terbaik</em> Kami</h2>
     </div>
     <div class="gal-filter reveal">
-        <button class="gf active">Semua</button>
-        <button class="gf">Kegiatan</button>
-        <button class="gf">Prestasi</button>
-        <button class="gf">Karya Siswa</button>
-        <button class="gf">Fasilitas</button>
+        <button class="gf active" onclick="filterGal(this,'all')">Semua</button>
+        <button class="gf" onclick="filterGal(this,'Kegiatan')">Kegiatan</button>
+        <button class="gf" onclick="filterGal(this,'Prestasi')">Prestasi</button>
+        <button class="gf" onclick="filterGal(this,'Seni Budaya')">Karya Siswa</button>
+        <button class="gf" onclick="filterGal(this,'Fasilitas')">Fasilitas</button>
     </div>
-    <div class="gal-grid reveal">
+    <div class="gal-grid reveal" id="galGridHome">
         <?php if (!empty($galeri_featured)):
         $bgMap = ['Fasilitas'=>'linear-gradient(135deg,#006064,#00838F)','Prestasi'=>'linear-gradient(135deg,#004D40,#00695C)','Kegiatan'=>'linear-gradient(135deg,#0D47A1,#1565C0)','Lingkungan'=>'linear-gradient(135deg,#1B5E20,#2E7D32)','Olahraga'=>'linear-gradient(135deg,#B71C1C,#C62828)'];
         foreach ($galeri_featured as $i => $g):
-            $bg = $g['file_foto'] ? "url('".base_url('uploads/'.$g['file_foto'])."') center/cover" : ($bgMap[$g['kategori']] ?? 'linear-gradient(135deg,var(--c1),var(--c3))');
+            $bg = $g['file_foto'] ? "url('".$upload_url . 'galeri/' . $g['file_foto']."') center/cover" : ($bgMap[$g['kategori']] ?? 'linear-gradient(135deg,var(--c1),var(--c3))');
         ?>
-        <div class="gi gi<?= min($i+1,7) ?>" style="background:<?= $bg ?>">
+        <div class="gi <?= $i==0?'featured':'' ?> gi<?= min($i+1,7) ?>" style="background:<?= $bg ?>" data-cat="<?= esc($g['kategori']) ?>">
         <?php if (!$g['file_foto']): ?><?= esc($g['emoji'] ?? '🖼️') ?><?php endif; ?>
         <div class="gi-ov"><div class="gi-cap"><?= esc($g['nama']) ?></div></div>
         </div>
@@ -268,6 +278,23 @@
         <?php endif; ?>
     </div>
     </section>
+
+    <script>
+    function filterGal(btn, cat) {
+        const section = btn.closest('section');
+        section.querySelectorAll('.gf').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        let firstVisible = true;
+        section.querySelectorAll('.gi').forEach(el => {
+            const isVisible = (cat === 'all' || el.dataset.cat === cat);
+            el.style.display = isVisible ? '' : 'none';
+            
+            el.classList.remove('featured');
+            if (isVisible && firstVisible) { el.classList.add('featured'); firstVisible = false; }
+        });
+    }
+    </script>
 
     <!-- ════════ PRESTASI ════════ -->
     <section class="prestasi">
@@ -295,9 +322,14 @@
         <?php if (!empty($guru_list)):
         $gc = ['ga1','ga2','ga3','ga4','ga5'];
         $dl = ['','d1','d2','d3','d4'];
-        foreach (array_slice($guru_list, 0, 5) as $i => $g): ?>
+        foreach (array_slice($guru_list, 0, 5) as $i => $g): 
+            $isImage = (str_contains($g['avatar'], '.') || str_contains($g['avatar'], '/'));
+            $avStyle = $isImage ? "background:url('".$upload_url . $g['avatar']."') center/cover; font-size:0;" : "";
+        ?>
         <div class="guru-card reveal <?= $dl[$i] ?>">
-        <div class="gc-av <?= $gc[$i%5] ?>"><?= esc($g['avatar']) ?></div>
+        <div class="gc-av <?= $gc[$i%5] ?>" style="<?= $avStyle ?>">
+            <?= $isImage ? '' : esc($g['avatar']) ?>
+        </div>
         <div class="gc-info">
             <div class="gc-name"><?= esc($g['nama']) ?></div>
             <div class="gc-role"><?= esc($g['jabatan']) ?></div>

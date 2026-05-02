@@ -21,9 +21,12 @@ class PpdbModel extends Model
     protected $useSoftDeletes = true;
 
     protected $allowedFields  = [
-        'nama', 'tempat_lahir', 'tgl_lahir',
-        'nama_ortu', 'telepon', 'email',
-        'asal', 'usia', 'status', 'tgl_daftar', 'catatan',
+        'nama', 'nik_siswa', 'nisn', 'jenis_kelamin', 'agama', 
+        'tempat_lahir', 'tgl_lahir', 'kewarganegaraan', 'status_kesehatan',
+        'nama_ortu', 'nik_ortu', 'pekerjaan_ortu', 'agama_ortu', 'telepon', 
+        'email', 'alamat', 'kode_pos', 'hubungan', 'asal', 'usia', 'status', 'tgl_daftar', 'catatan',
+        'file_akta', 'file_kk', 'file_ktp_ortu', 'file_foto_siswa', 
+        'file_imunisasi', 'file_surat_sehat', 'file_ijazah_tk', 'file_pernyataan',
     ];
 
     protected $useTimestamps  = true;
@@ -31,26 +34,12 @@ class PpdbModel extends Model
     protected $updatedField   = 'updated_at';
     protected $deletedField   = 'deleted_at';
 
-    // ── Validasi ───────────────────────────────
-    protected $validationRules = [
-        'nama'         => 'required|min_length[3]|max_length[150]',
-        'tempat_lahir' => 'required|max_length[100]',
-        'tgl_lahir'    => 'required|valid_date[Y-m-d]',
-        'nama_ortu'    => 'required|min_length[3]|max_length[150]',
-        'telepon'      => 'required|min_length[9]|max_length[20]',
-        'email'        => 'required|valid_email|max_length[100]',
-        'usia'         => 'permit_empty|integer',
-        'status'       => 'required|in_list[Menunggu,Diterima,Ditolak]',
-        'tgl_daftar'   => 'required|valid_date[Y-m-d]',
-    ];
-
-    protected $validationMessages = [
-        'nama'   => ['required' => 'Nama lengkap siswa wajib diisi.'],
-        'email'  => ['required' => 'Email orang tua wajib diisi.', 'valid_email' => 'Format email tidak valid.'],
-        'status' => ['in_list'  => 'Status tidak valid.'],
-    ];
-
-    protected $skipValidation = false;
+    /**
+     * Matikan validasi otomatis di Model karena sudah ditangani 
+     * secara manual di Controller dengan pemetaan field yang lebih kompleks.
+     */
+    protected $validationRules = [];
+    protected $skipValidation  = true;
 
     // ── Query Helpers ──────────────────────────
 

@@ -2,7 +2,7 @@
 $icons  = ['Prestasi'=>'🏆','Kegiatan'=>'🎉','Akademik'=>'📚','Lingkungan'=>'🌿','Seni Budaya'=>'🎨','Olahraga'=>'⚽'];
 $colors = ['Prestasi'=>'linear-gradient(135deg,#004D40,#00695C)','Kegiatan'=>'linear-gradient(135deg,#0D47A1,#1565C0)','Akademik'=>'linear-gradient(135deg,#4A148C,#6A1B9A)','Lingkungan'=>'linear-gradient(135deg,#1B5E20,#2E7D32)','Seni Budaya'=>'linear-gradient(135deg,#E65100,#EF6C00)','Olahraga'=>'linear-gradient(135deg,#B71C1C,#C62828)'];
 $ic    = $icons[$berita['kategori']]  ?? '📰';
-$bg    = $berita['thumbnail'] ? "url('".base_url('uploads/'.$berita['thumbnail'])."') center/cover" : ($colors[$berita['kategori']] ?? 'linear-gradient(135deg,var(--c1),var(--c3))');
+$bg    = $berita['thumbnail'] ? "url('".$upload_url . $berita['thumbnail']."') center/cover" : ($colors[$berita['kategori']] ?? 'linear-gradient(135deg,var(--c1),var(--c3))');
 ?>
 
 <!-- ════════ BREADCRUMB ════════ -->

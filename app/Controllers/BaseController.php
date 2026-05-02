@@ -37,7 +37,9 @@ abstract class BaseController extends Controller
             'site_phone'   => '(0713) 123-4567',
             'site_wa'      => '6281234567890',
             'site_address' => 'Jl. Pendidikan No. 56, Prabumulih, Sumatera Selatan 31124',
-            'logo_url'     => base_url('assets/img/logo.jpg'),
+            'logo_url'     => base_url('assets/img/logo.png'),
+            // Karena file fisik ada di web publik, maka URL-nya harus ke web publik
+            'upload_url'   => 'http://sekolah1.test/uploads/', 
         ];
     }
 

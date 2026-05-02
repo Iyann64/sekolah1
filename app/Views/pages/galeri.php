@@ -32,9 +32,9 @@
         <?php if (!empty($galeri)): foreach ($galeri as $i => $g):
         $bg = $bgColors[$g['kategori']] ?? 'linear-gradient(135deg,var(--c1),var(--c2))';
         $isFirst = $i === 0;
-        $thumb   = $g['file_foto'] ? base_url('uploads/'.$g['file_foto']) : null;
+        $thumb   = $g['file_foto'] ? $upload_url . $g['file_foto'] : null;
         ?>
-        <div class="gi <?= $isFirst ? 'gi1' : 'gi'.min($i+1,7) ?>"
+        <div class="gi <?= $isFirst ? 'featured gi1' : 'gi'.min($i+1,7) ?>" style="background:<?= $thumb ? "url('".$upload_url . 'galeri/' . $g['file_foto']."') center/cover" : $bg ?>"
             style="background:<?= $thumb ? "url('$thumb') center/cover" : $bg ?>"
             data-cat="<?= esc($g['kategori']) ?>">
         <?php if (!$thumb): ?><span><?= esc($g['emoji'] ?? '🖼️') ?></span><?php endif; ?>
@@ -57,11 +57,16 @@
 
     <script>
     function filterGal(btn, cat) {
-    document.querySelectorAll('.gf').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('#galGrid .gi').forEach(el => {
-        const elCat = el.dataset.cat;
-        el.style.display = (cat === 'all' || elCat === cat) ? '' : 'none';
-    });
+        document.querySelectorAll('.gf').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        let firstVisible = true;
+        document.querySelectorAll('#galGrid .gi').forEach(el => {
+            const isVisible = (cat === 'all' || el.dataset.cat === cat);
+            el.style.display = isVisible ? '' : 'none';
+            
+            el.classList.remove('featured');
+            if (isVisible && firstVisible) { el.classList.add('featured'); firstVisible = false; }
+        });
     }
     </script>

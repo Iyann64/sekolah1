@@ -1560,7 +1560,7 @@ section {
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.gi:nth-child(1) {
+.gi.featured {
   grid-column: span 2;
   grid-row: span 2;
   font-size: 72px;
