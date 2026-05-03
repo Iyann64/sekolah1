@@ -32,13 +32,19 @@
         <?php if (!empty($galeri)): foreach ($galeri as $i => $g):
         $bg = $bgColors[$g['kategori']] ?? 'linear-gradient(135deg,var(--c1),var(--c2))';
         $isFirst = $i === 0;
-        $thumb   = $g['file_foto'] ? $upload_url . $g['file_foto'] : null;
+        $ext = $g['file_foto'] ? pathinfo($g['file_foto'], PATHINFO_EXTENSION) : '';
+        $isVideo = in_array(strtolower($ext), ['mp4', 'webm', 'mov']);
+        $fileUrl = $g['file_foto'] ? $upload_url . 'galeri/' . $g['file_foto'] : null;
+        $bgStyle = ($g['file_foto'] && !$isVideo) ? "url('$fileUrl') center/cover" : $bg;
         ?>
-        <div class="gi <?= $isFirst ? 'featured gi1' : 'gi'.min($i+1,7) ?>" style="background:<?= $thumb ? "url('".$upload_url . 'galeri/' . $g['file_foto']."') center/cover" : $bg ?>"
-            style="background:<?= $thumb ? "url('$thumb') center/cover" : $bg ?>"
+        <div class="gi <?= $isFirst ? 'featured gi1' : 'gi'.min($i+1,7) ?>" 
+            style="background:<?= $bgStyle ?>; position:relative;"
             data-cat="<?= esc($g['kategori']) ?>">
-        <?php if (!$thumb): ?><span><?= esc($g['emoji'] ?? '🖼️') ?></span><?php endif; ?>
-        <div class="gi-ov">
+            <?php if ($isVideo): ?>
+                <video src="<?= $fileUrl ?>" autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0"></video>
+            <?php endif; ?>
+            <?php if (!$g['file_foto']): ?><span><?= esc($g['emoji'] ?? '🖼️') ?></span><?php endif; ?>
+        <div class="gi-ov" style="z-index:1">
             <div class="gi-cap"><?= esc($g['nama']) ?></div>
         </div>
         </div>

@@ -156,10 +156,15 @@
         <!-- Featured news — dinamis dari DB, fallback statis -->
         <?php if (!empty($berita_terbaru)): 
             $f = $berita_terbaru[0]; 
-            $fThumb = $f['thumbnail'] ? $upload_url . $f['thumbnail'] : null;
+            $fExt = $f['thumbnail'] ? pathinfo($f['thumbnail'], PATHINFO_EXTENSION) : '';
+            $fIsVideo = in_array(strtolower($fExt), ['mp4', 'webm', 'mov']);
+            $fThumb = $f['thumbnail'] ? $upload_url . 'berita/' . $f['thumbnail'] : null;
         ?>
         <a href="<?= base_url('berita/'.$f['slug']) ?>" class="news-featured reveal" style="text-decoration:none">
-            <div class="nf-thumb" style="<?= $fThumb ? "background:url('$fThumb') center/cover" : '' ?>">
+            <div class="nf-thumb" style="<?= ($fThumb && !$fIsVideo) ? "background:url('$fThumb') center/cover" : '' ?>; position:relative; overflow:hidden;">
+                <?php if ($fIsVideo): ?>
+                    <video src="<?= $fThumb ?>" autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;"></video>
+                <?php endif; ?>
                 <?= !$fThumb ? '🏅' : '' ?>
             </div>
             <div class="nf-body">
@@ -171,10 +176,15 @@
         </a>
         <div class="news-list reveal d1">
             <?php foreach (array_slice($berita_terbaru, 1) as $b): 
-                $bThumb = $b['thumbnail'] ? $upload_url . $b['thumbnail'] : null;
+                $bExt = $b['thumbnail'] ? pathinfo($b['thumbnail'], PATHINFO_EXTENSION) : '';
+                $bIsVideo = in_array(strtolower($bExt), ['mp4', 'webm', 'mov']);
+                $bThumb = $b['thumbnail'] ? $upload_url . 'berita/' . $b['thumbnail'] : null;
             ?>
             <a href="<?= base_url('berita/'.$b['slug']) ?>" class="nl-item" style="text-decoration:none">
-            <div class="nl-thumb" style="<?= $bThumb ? "background:url('$bThumb') center/cover" : '' ?>">
+            <div class="nl-thumb" style="<?= ($bThumb && !$bIsVideo) ? "background:url('$bThumb') center/cover" : '' ?>; position:relative; overflow:hidden;">
+                <?php if ($bIsVideo): ?>
+                    <video src="<?= $bThumb ?>" autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;"></video>
+                <?php endif; ?>
                 <?= !$bThumb ? '📰' : '' ?>
             </div>
             <div>
@@ -260,11 +270,17 @@
         <?php if (!empty($galeri_featured)):
         $bgMap = ['Fasilitas'=>'linear-gradient(135deg,#006064,#00838F)','Prestasi'=>'linear-gradient(135deg,#004D40,#00695C)','Kegiatan'=>'linear-gradient(135deg,#0D47A1,#1565C0)','Lingkungan'=>'linear-gradient(135deg,#1B5E20,#2E7D32)','Olahraga'=>'linear-gradient(135deg,#B71C1C,#C62828)'];
         foreach ($galeri_featured as $i => $g):
-            $bg = $g['file_foto'] ? "url('".$upload_url . 'galeri/' . $g['file_foto']."') center/cover" : ($bgMap[$g['kategori']] ?? 'linear-gradient(135deg,var(--c1),var(--c3))');
+            $ext = $g['file_foto'] ? pathinfo($g['file_foto'], PATHINFO_EXTENSION) : '';
+            $isVideo = in_array(strtolower($ext), ['mp4', 'webm', 'mov']);
+            $fileUrl = $g['file_foto'] ? $upload_url . 'galeri/' . $g['file_foto'] : null;
+            $bg = ($g['file_foto'] && !$isVideo) ? "url('$fileUrl') center/cover" : ($bgMap[$g['kategori']] ?? 'linear-gradient(135deg,var(--c1),var(--c3))');
         ?>
-        <div class="gi <?= $i==0?'featured':'' ?> gi<?= min($i+1,7) ?>" style="background:<?= $bg ?>" data-cat="<?= esc($g['kategori']) ?>">
-        <?php if (!$g['file_foto']): ?><?= esc($g['emoji'] ?? '🖼️') ?><?php endif; ?>
-        <div class="gi-ov"><div class="gi-cap"><?= esc($g['nama']) ?></div></div>
+        <div class="gi <?= $i==0?'featured':'' ?> gi<?= min($i+1,7) ?>" style="background:<?= $bg ?>; position:relative;" data-cat="<?= esc($g['kategori']) ?>">
+            <?php if ($isVideo): ?>
+                <video src="<?= $fileUrl ?>" autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0"></video>
+            <?php endif; ?>
+            <?php if (!$g['file_foto']): ?><?= esc($g['emoji'] ?? '🖼️') ?><?php endif; ?>
+            <div class="gi-ov" style="z-index:1"><div class="gi-cap"><?= esc($g['nama']) ?></div></div>
         </div>
         <?php endforeach; else: ?>
         <!-- Fallback statis -->

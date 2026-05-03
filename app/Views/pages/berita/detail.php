@@ -2,7 +2,10 @@
 $icons  = ['Prestasi'=>'🏆','Kegiatan'=>'🎉','Akademik'=>'📚','Lingkungan'=>'🌿','Seni Budaya'=>'🎨','Olahraga'=>'⚽'];
 $colors = ['Prestasi'=>'linear-gradient(135deg,#004D40,#00695C)','Kegiatan'=>'linear-gradient(135deg,#0D47A1,#1565C0)','Akademik'=>'linear-gradient(135deg,#4A148C,#6A1B9A)','Lingkungan'=>'linear-gradient(135deg,#1B5E20,#2E7D32)','Seni Budaya'=>'linear-gradient(135deg,#E65100,#EF6C00)','Olahraga'=>'linear-gradient(135deg,#B71C1C,#C62828)'];
 $ic    = $icons[$berita['kategori']]  ?? '📰';
-$bg    = $berita['thumbnail'] ? "url('".$upload_url . $berita['thumbnail']."') center/cover" : ($colors[$berita['kategori']] ?? 'linear-gradient(135deg,var(--c1),var(--c3))');
+$ext   = $berita['thumbnail'] ? pathinfo($berita['thumbnail'], PATHINFO_EXTENSION) : '';
+$isVideo = in_array(strtolower($ext), ['mp4', 'webm', 'mov']);
+$fileUrl = $berita['thumbnail'] ? $upload_url . 'berita/' . $berita['thumbnail'] : null;
+$bg    = ($fileUrl && !$isVideo) ? "url('$fileUrl') center/cover" : ($colors[$berita['kategori']] ?? 'linear-gradient(135deg,var(--c1),var(--c3))');
 ?>
 
 <!-- ════════ BREADCRUMB ════════ -->
@@ -39,8 +42,11 @@ $bg    = $berita['thumbnail'] ? "url('".$upload_url . $berita['thumbnail']."') c
       <h1 class="ah-judul"><?= esc($berita['judul']) ?></h1>
 
       <!-- Thumbnail -->
-      <div class="ah-thumb" style="background:<?= $bg ?>">
-        <?php if (!$berita['thumbnail']): ?>
+      <div class="ah-thumb" style="background:<?= $bg ?>; position:relative; overflow:hidden;">
+        <?php if ($isVideo): ?>
+            <video src="<?= $fileUrl ?>" controls autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;"></video>
+        <?php endif; ?>
+        <?php if (!$berita['thumbnail'] && !$isVideo): ?>
         <span class="ah-thumb-ic"><?= $ic ?></span>
         <?php endif; ?>
       </div>

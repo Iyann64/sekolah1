@@ -46,13 +46,18 @@
         $icons  = ['Prestasi'=>'🏆','Kegiatan'=>'🎉','Akademik'=>'📚','Lingkungan'=>'🌿','Seni Budaya'=>'🎨','Olahraga'=>'⚽'];
         $colors = ['Prestasi'=>'linear-gradient(135deg,#004D40,#00695C)','Kegiatan'=>'linear-gradient(135deg,#0D47A1,#1565C0)','Akademik'=>'linear-gradient(135deg,#4A148C,#6A1B9A)','Lingkungan'=>'linear-gradient(135deg,#1B5E20,#2E7D32)','Seni Budaya'=>'linear-gradient(135deg,#E65100,#EF6C00)','Olahraga'=>'linear-gradient(135deg,#B71C1C,#C62828)'];
         $first  = array_shift($berita);
-        $firstThumb = $first['thumbnail'] ? $upload_url . $first['thumbnail'] : null;
-        $firstBg    = $firstThumb ? "url('$firstThumb') center/cover" : ($colors[$first['kategori']] ?? 'var(--c1)');
+        $firstExt = $first['thumbnail'] ? pathinfo($first['thumbnail'], PATHINFO_EXTENSION) : '';
+        $firstIsVideo = in_array(strtolower($firstExt), ['mp4', 'webm', 'mov']);
+        $firstThumb = $first['thumbnail'] ? $upload_url . 'berita/' . $first['thumbnail'] : null;
+        $firstBg    = ($firstThumb && !$firstIsVideo) ? "url('$firstThumb') center/cover" : ($colors[$first['kategori']] ?? 'var(--c1)');
     ?>
 
     <!-- ── Berita Utama ───────────────────── -->
     <a href="<?= base_url('berita/'.$first['slug']) ?>" class="news-featured reveal">
-        <div class="nf-thumb" style="background:<?= $firstBg ?>"><?= !$firstThumb ? ($icons[$first['kategori']] ?? '📰') : '' ?></div>
+        <div class="nf-thumb" style="background:<?= $firstBg ?>; position:relative; overflow:hidden;">
+            <?php if ($firstIsVideo): ?><video src="<?= $firstThumb ?>" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;"></video><?php endif; ?>
+            <?= (!$firstThumb && !$firstIsVideo) ? ($icons[$first['kategori']] ?? '📰') : '' ?>
+        </div>
         <div class="nf-body">
         <div class="nf-cat">📌 <?= esc($first['kategori']) ?></div>
         <div class="nf-title"><?= esc($first['judul']) ?></div>
@@ -72,12 +77,19 @@
         <?php foreach ($berita as $i => $b):
         $bg = $colors[$b['kategori']] ?? 'linear-gradient(135deg,var(--c1),var(--c3))';
         $ic = $icons[$b['kategori']] ?? '📰';
+        $bExt = $b['thumbnail'] ? pathinfo($b['thumbnail'], PATHINFO_EXTENSION) : '';
+        $bIsVideo = in_array(strtolower($bExt), ['mp4', 'webm', 'mov']);
+        $bThumb = $b['thumbnail'] ? $upload_url . 'berita/' . $b['thumbnail'] : null;
+        $bBgStyle = ($bThumb && !$bIsVideo) ? "url('$bThumb') center/cover" : $bg;
         ?>
         <a href="<?= base_url('berita/'.$b['slug']) ?>"
         class="berita-card reveal <?= $i > 0 ? 'd'.min($i,4) : '' ?>">
         <!-- Thumbnail -->
-        <div class="bc-thumb" style="background:<?= $b['thumbnail'] ? "url('".$upload_url . $b['thumbnail']."') center/cover" : $bg ?>">
-            <?php if (!$b['thumbnail']): ?>
+        <div class="bc-thumb" style="background:<?= $bBgStyle ?>; position:relative; overflow:hidden;">
+            <?php if ($bIsVideo): ?>
+                <video src="<?= $bThumb ?>" autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0"></video>
+            <?php endif; ?>
+            <?php if (!$b['thumbnail'] && !$bIsVideo): ?>
             <span class="bc-thumb-ic"><?= $ic ?></span>
             <?php endif; ?>
             <span class="bc-kat"><?= esc($b['kategori']) ?></span>
