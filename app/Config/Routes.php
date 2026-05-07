@@ -35,6 +35,7 @@ $routes->get('/home', static fn() => redirect()->to('/'));   // alias → berand
 $routes->get('/tentang', 'Home::tentang');   // Profil sekolah, visi misi, guru
 $routes->get('/program', 'Home::program');   // Program unggulan & fasilitas
 $routes->get('/galeri',  'Home::galeri');    // Galeri foto kegiatan
+$routes->get('/privasi', 'Home::privasi');   // Kebijakan Privasi
 
 
 // ═════════════════════════════════════════════════════

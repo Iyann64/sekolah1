@@ -9,6 +9,9 @@
     <a href="<?= base_url('program') ?>" class="bn-item" data-page="program">
         <div class="bn-icon">📚</div><div class="bn-label">Program</div>
     </a>
+    <a href="<?= base_url('agenda') ?>" class="bn-item" data-page="agenda">
+        <div class="bn-icon">📅</div><div class="bn-label">Agenda</div>
+    </a>
     <a href="<?= base_url('galeri') ?>" class="bn-item" data-page="galeri">
         <div class="bn-icon">🖼️</div><div class="bn-label">Galeri</div>
     </a>

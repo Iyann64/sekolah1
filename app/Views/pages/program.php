@@ -20,6 +20,7 @@
     <div class="smart-grid">
         <div class="sc reveal d2"><div class="sc-ic sci2">📋</div><div class="sc-title">PPDB Online</div><div class="sc-desc">Daftar siswa baru online</div></div>
         <div class="sc reveal d4"><div class="sc-ic sci4">📢</div><div class="sc-title">Pengumuman</div><div class="sc-desc">Info & pengumuman terkini</div></div>
+        <div class="sc reveal d3"><div class="sc-ic sci3">📅</div><div class="sc-title">Kalender Akademik</div><div class="sc-desc">Jadwal kegiatan sekolah</div></div>
         <div class="sc reveal d4"><div class="sc-ic sci8">💬</div><div class="sc-title">Konsultasi</div><div class="sc-desc">Tanya jawab dengan guru</div></div>
     </div>
     </div>

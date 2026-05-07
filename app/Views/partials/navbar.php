@@ -15,9 +15,10 @@
         <li><a href="<?= base_url('/') ?>"        class="<?= $segment === ''        ? 'active' : '' ?>">Beranda</a></li>
         <li><a href="<?= base_url('tentang') ?>"  class="<?= $segment === 'tentang' ? 'active' : '' ?>">Tentang</a></li>
         <li><a href="<?= base_url('program') ?>"  class="<?= $segment === 'program' ? 'active' : '' ?>">Program</a></li>
-        <li><a href="<?= base_url('berita') ?>"   class="<?= $segment === 'berita'  ? 'active' : '' ?>">Berita</a></li>
-        <li><a href="<?= base_url('galeri') ?>"   class="<?= $segment === 'galeri'  ? 'active' : '' ?>">Galeri</a></li>
-        <li><a href="<?= base_url('kontak') ?>"   class="<?= $segment === 'kontak'  ? 'active' : '' ?>">Kontak</a></li>
+        <li><a href="<?= base_url('berita')  ?>"   class="<?= $segment === 'berita'  ? 'active' : '' ?>">Berita</a></li>
+        <li><a href="<?= base_url('galeri')  ?>"   class="<?= $segment === 'galeri'  ? 'active' : '' ?>">Galeri</a></li>
+        <li><a href="<?= base_url('agenda')  ?>"   class="<?= $segment === 'agenda'  ? 'active' : '' ?>">Agenda</a></li>
+        <li><a href="<?= base_url('kontak')  ?>"   class="<?= $segment === 'kontak'  ? 'active' : '' ?>">Kontak</a></li>
     </ul>
     <div class="nav-right">
         <a href="<?= base_url('ppdb') ?>" class="btn-daftar">✏️ Daftar PPDB →</a>
@@ -34,6 +35,8 @@
     <a href="<?= base_url('tentang') ?>">🏫 Tentang Kami</a>
     <a href="<?= base_url('program') ?>">📚 Program</a>
     <a href="<?= base_url('berita') ?>">📰 Berita</a>
+    <a href="<?= base_url('agenda') ?>">📅 Agenda</a>
+    <a href="<?= base_url('agenda') ?>">📅 Kalender Akademik</a>
     <a href="<?= base_url('galeri') ?>">🖼️ Galeri</a>
     <a href="<?= base_url('kontak') ?>">📞 Kontak</a>
     <a href="<?= base_url('ppdb') ?>" style="color:var(--c1);background:var(--c5);border-bottom:none;margin-top:8px">✏️ PPDB 2026/2027</a>

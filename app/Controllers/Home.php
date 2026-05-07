@@ -87,6 +87,16 @@ class Home extends BaseController
     }
 
     // ────────────────────────────────────────────
+    // GET /privasi
+    // ────────────────────────────────────────────
+    public function privasi(): string
+    {
+        return $this->render('pages/privasi', [
+            'title' => 'Kebijakan Privasi',
+        ]);
+    }
+
+    // ────────────────────────────────────────────
     // GET /kontak
     // ────────────────────────────────────────────
     public function kontak(): string

@@ -19,6 +19,7 @@
             <li><a href="<?= base_url('tentang') ?>">Tentang Kami</a></li>
             <li><a href="<?= base_url('program') ?>">Program</a></li>
             <li><a href="<?= base_url('berita') ?>">Berita</a></li>
+            <li><a href="<?= base_url('agenda') ?>">Agenda</a></li>
             <li><a href="<?= base_url('galeri') ?>">Galeri</a></li>
             <li><a href="<?= base_url('kontak') ?>">Kontak</a></li>
         </ul>
@@ -27,15 +28,17 @@
         <h4>Layanan</h4>
         <ul>
             <li><a href="<?= base_url('ppdb') ?>">PPDB Online</a></li>
+            <li><a href="<?= base_url('ppdb/cek-status') ?>">Cek Status Pendaftaran</a></li>
+            <li><a href="<?= base_url('kontak') ?>">Konsultasi Online</a></li>
         </ul>
         </div>
         <div>
         <h4>Informasi</h4>
         <ul>
-            <li><a href="#">Kalender Akademik</a></li>
-            <li><a href="#">Prestasi Sekolah</a></li>
-            <li><a href="#">Pengumuman</a></li>
-            <li><a href="#">Kebijakan Privasi</a></li>
+            <li><a href="<?= base_url('agenda') ?>">Kalender Akademik</a></li>
+            <li><a href="<?= base_url('tentang#prestasi') ?>">Prestasi Sekolah</a></li>
+            <li><a href="<?= base_url('berita') ?>">Pengumuman</a></li>
+            <li><a href="<?= base_url('privasi') ?>">Kebijakan Privasi</a></li>
         </ul>
         </div>
         <div>
