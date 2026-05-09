@@ -53,6 +53,16 @@ class Ppdb extends BaseController
         ]);
     }
 
+    public function cetakPdf($id)
+    {
+        $siswa = $this->model->find($id);
+        if (!$siswa) throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+
+        return view('pages/ppdb_pdf', array_merge($this->data, [
+            'siswa' => $siswa
+        ]));
+    }
+
     // ────────────────────────────────────────────
     // GET /ppdb
     // ────────────────────────────────────────────
@@ -191,9 +201,10 @@ class Ppdb extends BaseController
                 ->withInput();
         }
 
-        $noPendaftaran = 'PPDB-' . date('Ymd') . '-' . str_pad($this->model->getInsertID(), 4, '0', STR_PAD_LEFT);
+        $insertID = $this->model->getInsertID();
+        $noPendaftaran = 'PPDB-' . date('Ymd') . '-' . str_pad($insertID, 4, '0', STR_PAD_LEFT);
 
         return redirect()->to('/ppdb')
-            ->with('success', 'Pendaftaran berhasil dikirim! No. Pendaftaran Anda: <strong>' . $noPendaftaran . '</strong>. Kami akan menghubungi Anda setelah verifikasi data.');
+            ->with('success', 'Pendaftaran berhasil dikirim! No. Pendaftaran Anda: <strong>' . $noPendaftaran . '</strong>. <br><br> <a href="'.base_url('ppdb/cetak/'.$insertID).'" target="_blank" class="btn-hero-p" style="padding:8px 16px; font-size:13px;">🖨️ Cetak Bukti Pendaftaran (PDF)</a>');
     }
 }

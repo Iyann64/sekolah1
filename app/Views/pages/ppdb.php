@@ -167,6 +167,11 @@
                             </span>
                         </div>
                     </div>
+                    <div style="margin-top:20px; border-top:1px solid #eee; padding-top:15px; text-align:center">
+                        <a href="<?= base_url('ppdb/cetak/'.$siswa['id']) ?>" target="_blank" class="btn-hero-p" style="padding:10px 20px; border-radius:10px; font-size:14px">
+                            🖨️ Cetak Bukti Pendaftaran
+                        </a>
+                    </div>
                 </div>
             <?php endif; ?>
         </div>

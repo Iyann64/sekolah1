@@ -43,7 +43,7 @@
         </div>
         <div>
         <h4>Lokasi</h4>
-        <p style="font-size: 14px; line-height: 1.6;">
+        <p style="font-size: 14px; line-height: 1.6; color: #4285F4;">
             📍 Jl. Pendidikan No. 56<br>
             Prabumulih, Sumsel 31124
         </p>
