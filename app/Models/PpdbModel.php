@@ -24,7 +24,7 @@ class PpdbModel extends Model
         'nama', 'nik_siswa', 'nisn', 'jenis_kelamin', 'agama', 
         'tempat_lahir', 'tgl_lahir', 'kewarganegaraan', 'status_kesehatan',
         'nama_ortu', 'nik_ortu', 'pekerjaan_ortu', 'agama_ortu', 'telepon', 
-        'email', 'alamat', 'kode_pos', 'hubungan', 'asal', 'usia', 'status', 'tgl_daftar', 'catatan',
+        'email', 'alamat', 'kode_pos', 'hubungan', 'asal', 'jalur_pendaftaran', 'usia', 'status', 'tgl_daftar', 'catatan',
         'file_akta', 'file_kk', 'file_ktp_ortu', 'file_foto_siswa', 
         'file_imunisasi', 'file_surat_sehat', 'file_ijazah_tk', 'file_pernyataan',
     ];

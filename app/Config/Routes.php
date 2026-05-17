@@ -58,8 +58,12 @@ $routes->get('/berita/(:segment)', 'Berita::detail/$1'); // Detail artikel (by s
 // ═════════════════════════════════════════════════════
 $routes->get( '/ppdb',         'Ppdb::index');   // Info PPDB + form daftar
 $routes->get( '/ppdb/cek-status', 'Ppdb::cekStatus'); // Fitur cek status via NIK
+$routes->get( '/ppdb/daftar',  'Ppdb::form');    // Tampilan Form Pendaftaran
 $routes->post('/ppdb/daftar',  'Ppdb::daftar');  // POST: simpan pendaftaran
 $routes->get( '/ppdb/cetak/(:num)', 'Ppdb::cetakPdf/$1'); // Cetak PDF Bukti Daftar
+
+// Route untuk melayani file upload PPDB
+$routes->get('uploads/ppdb/(:any)', 'Ppdb::serveFile/$1');
 
 // ═════════════════════════════════════════════════════
 // AGENDA & KALENDER — Controller: Agenda

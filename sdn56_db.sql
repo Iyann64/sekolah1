@@ -99,6 +99,7 @@ CREATE TABLE `ppdb` (
   `kode_pos`    VARCHAR(10)   NULL,
   `hubungan`    ENUM('Ayah','Ibu','Wali') NULL,
   `asal`        VARCHAR(150)  NULL  COMMENT 'Asal TK/PAUD',
+  `jalur_pendaftaran` ENUM('Afirmasi','Mutasi Kerja Orang Tua','Domisili') NULL,
   `usia`        TINYINT UNSIGNED NOT NULL DEFAULT 6,
   `status`      ENUM('Menunggu','Diterima','Ditolak') NOT NULL DEFAULT 'Menunggu',
   `tgl_daftar`  DATE          NOT NULL,
@@ -372,12 +373,12 @@ INSERT INTO `galeri` (`nama`, `kategori`, `emoji`, `created_at`) VALUES
 -- ══════════════════════════════════════════
 -- SEED DATA: ppdb (contoh data pendaftar)
 -- ══════════════════════════════════════════
-INSERT INTO `ppdb` (`nama`, `tempat_lahir`, `tgl_lahir`, `nama_ortu`, `telepon`, `email`, `asal`, `usia`, `status`, `tgl_daftar`, `created_at`) VALUES
-('Muhammad Rafif Al-Farizi',  'Prabumulih', '2020-04-12', 'Bapak Andri Setiawan',  '081234567890', 'andri@gmail.com',   'TK Pertiwi 1',    6, 'Menunggu', '2026-04-03', NOW()),
-('Nayla Putri Rahayu',        'Prabumulih', '2020-07-22', 'Ibu Sari Dewi',         '081345678901', 'sari@gmail.com',    'TK Al-Hidayah',   6, 'Diterima', '2026-04-04', NOW()),
-('Arkan Dwi Pratama',         'Muara Enim', '2019-11-05', 'Bapak Dedi Kurniawan',  '081456789012', 'dedi@yahoo.com',    'TK Budi Luhur',   6, 'Menunggu', '2026-04-05', NOW()),
-('Zahira Aulia Putri',        'Prabumulih', '2020-02-18', 'Ibu Rina Marlina',      '081567890123', 'rina@gmail.com',    'TK Kemala Bhayangkari', 6, 'Diterima', '2026-04-06', NOW()),
-('Farhan Rizky Maulana',      'Prabumulih', '2019-08-30', 'Bapak Hendra Permana',  '081678901234', 'hendra@gmail.com',  '-',               7, 'Ditolak',  '2026-04-07', NOW());
+INSERT INTO `ppdb` (`nama`, `tempat_lahir`, `tgl_lahir`, `nama_ortu`, `telepon`, `email`, `asal`, `jalur_pendaftaran`, `usia`, `status`, `tgl_daftar`, `created_at`) VALUES
+('Muhammad Rafif Al-Farizi',  'Prabumulih', '2020-04-12', 'Bapak Andri Setiawan',  '081234567890', 'andri@gmail.com',   'TK Pertiwi 1',    'Domisili', 6, 'Menunggu', '2026-04-03', NOW()),
+('Nayla Putri Rahayu',        'Prabumulih', '2020-07-22', 'Ibu Sari Dewi',         '081345678901', 'sari@gmail.com',    'TK Al-Hidayah',   'Afirmasi', 6, 'Diterima', '2026-04-04', NOW()),
+('Arkan Dwi Pratama',         'Muara Enim', '2019-11-05', 'Bapak Dedi Kurniawan',  '081456789012', 'dedi@yahoo.com',    'TK Budi Luhur',   'Domisili', 6, 'Menunggu', '2026-04-05', NOW()),
+('Zahira Aulia Putri',        'Prabumulih', '2020-02-18', 'Ibu Rina Marlina',      '081567890123', 'rina@gmail.com',    'TK Kemala Bhayangkari', 'Domisili', 6, 'Diterima', '2026-04-06', NOW()),
+('Farhan Rizky Maulana',      'Prabumulih', '2019-08-30', 'Bapak Hendra Permana',  '081678901234', 'hendra@gmail.com',  '-',               'Mutasi Kerja Orang Tua', 7, 'Ditolak',  '2026-04-07', NOW());
 
 SET FOREIGN_KEY_CHECKS = 1;
 

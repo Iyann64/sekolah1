@@ -3,6 +3,9 @@
 namespace App\Controllers;
 
 use App\Models\PpdbModel;
+use App\Models\PpdbConfigModel;
+use App\Models\PpdbJadwalModel;
+use App\Models\PpdbDokumenModel;
 
 /**
  * Ppdb Controller — sdn56_web
@@ -13,22 +16,24 @@ use App\Models\PpdbModel;
 class Ppdb extends BaseController
 {
     private PpdbModel $model;
-
-    /**
-     * Konfigurasi PPDB — sesuaikan setiap tahun ajaran baru.
-     * Status: 'Belum Dibuka' | 'Sedang Berlangsung' | 'Ditutup'
-     */
-    private const CONFIG = [
-        'tgl_buka'  => '1 April 2026',
-        'tgl_tutup' => '31 Mei 2026',
-        'kuota'     => '4 Rombongan Belajar',
-        'usia'      => '6 – 7 Tahun',
-        'status'    => 'Sedang Berlangsung',
-    ];
+    private PpdbConfigModel $configModel;
+    private PpdbJadwalModel $jadwalModel;
+    private PpdbDokumenModel $dokumenModel;
 
     public function __construct()
     {
         $this->model = new PpdbModel();
+        $this->configModel = new PpdbConfigModel();
+        $this->jadwalModel = new PpdbJadwalModel();
+        $this->dokumenModel = new PpdbDokumenModel();
+    }
+
+    /**
+     * Ambil konfigurasi PPDB dari database
+     */
+    private function getConfig()
+    {
+        return $this->configModel->getAll();
     }
 
     // ────────────────────────────────────────────
@@ -38,6 +43,7 @@ class Ppdb extends BaseController
     {
         $nik = $this->request->getGet('nik');
         $siswa = null;
+        $config = $this->getConfig();
 
         if ($nik) {
             $siswa = $this->model->where('nik_siswa', $nik)->first();
@@ -48,7 +54,7 @@ class Ppdb extends BaseController
 
         return $this->render('pages/ppdb', [
             'title'  => 'Cek Status PPDB',
-            'config' => self::CONFIG,
+            'config' => $config,
             'siswa'  => $siswa
         ]);
     }
@@ -58,9 +64,28 @@ class Ppdb extends BaseController
         $siswa = $this->model->find($id);
         if (!$siswa) throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 
+        $config = $this->getConfig();
+        $jadwal = $this->jadwalModel->getAktif();
+        $dokumen = $this->dokumenModel->getDaftar();
+
         return view('pages/ppdb_pdf', array_merge($this->data, [
-            'siswa' => $siswa
+            'siswa'   => $siswa,
+            'config'  => $config,
+            'jadwal'  => $jadwal,
+            'dokumen' => $dokumen,
         ]));
+    }
+
+    // ────────────────────────────────────────────
+    // GET /ppdb/daftar (Halaman Form)
+    // ────────────────────────────────────────────
+    public function form(): string
+    {
+        $config = $this->getConfig();
+        return $this->render('pages/ppdb_form', [
+            'title'  => 'Formulir Pendaftaran PPDB',
+            'config' => $config,
+        ]);
     }
 
     // ────────────────────────────────────────────
@@ -68,9 +93,10 @@ class Ppdb extends BaseController
     // ────────────────────────────────────────────
     public function index(): string
     {
+        $config = $this->getConfig();
         return $this->render('pages/ppdb', [
             'title'  => 'PPDB 2026/2027',
-            'config' => self::CONFIG,
+            'config' => $config,
         ]);
     }
 
@@ -79,8 +105,10 @@ class Ppdb extends BaseController
     // ────────────────────────────────────────────
     public function daftar()
     {
+        $config = $this->getConfig();
+
         // Cek status pendaftaran
-        if (self::CONFIG['status'] !== 'Sedang Berlangsung') {
+        if ($config['status'] !== 'Sedang Berlangsung') {
             return redirect()->to('/ppdb')
                 ->with('error', 'Pendaftaran PPDB belum/sudah ditutup. Silakan pantau website kami.');
         }
@@ -103,15 +131,16 @@ class Ppdb extends BaseController
             'kode_pos'     => 'permit_empty|numeric|min_length[5]',
             'usia'         => 'permit_empty|integer|greater_than[4]|less_than[10]',
             'asal_sekolah' => 'permit_empty|max_length[150]',
+            'jalur_pendaftaran' => 'required|in_list[Afirmasi,Mutasi Kerja Orang Tua,Domisili]',
             // Validasi File
-            'file_akta'    => 'uploaded[file_akta]|max_size[file_akta,2048]|ext_in[file_akta,pdf,jpg,jpeg,png]',
-            'file_kk'      => 'uploaded[file_kk]|max_size[file_kk,2048]|ext_in[file_kk,pdf,jpg,jpeg,png]',
-            'file_ktp_ortu'=> 'uploaded[file_ktp_ortu]|max_size[file_ktp_ortu,2048]|ext_in[file_ktp_ortu,pdf,jpg,jpeg,png]',
-            'file_foto_siswa'=> 'uploaded[file_foto_siswa]|max_size[file_foto_siswa,2048]|is_image[file_foto_siswa]',
-            'file_imunisasi' => 'uploaded[file_imunisasi]|max_size[file_imunisasi,2048]|ext_in[file_imunisasi,pdf,jpg,jpeg,png]',
-            'file_surat_sehat'=> 'uploaded[file_surat_sehat]|max_size[file_surat_sehat,2048]|ext_in[file_surat_sehat,pdf,jpg,jpeg,png]',
-            'file_ijazah_tk' => 'permit_empty|max_size[file_ijazah_tk,2048]|ext_in[file_ijazah_tk,pdf,jpg,jpeg,png]',
-            'file_pernyataan'=> 'uploaded[file_pernyataan]|max_size[file_pernyataan,2048]|ext_in[file_pernyataan,pdf,jpg,jpeg,png]',
+            'file_akta'    => 'uploaded[file_akta]|max_size[file_akta,5120]|ext_in[file_akta,pdf,jpg,jpeg,png]',
+            'file_kk'      => 'uploaded[file_kk]|max_size[file_kk,5120]|ext_in[file_kk,pdf,jpg,jpeg,png]',
+            'file_ktp_ortu'=> 'uploaded[file_ktp_ortu]|max_size[file_ktp_ortu,5120]|ext_in[file_ktp_ortu,pdf,jpg,jpeg,png]',
+            'file_foto_siswa'=> 'uploaded[file_foto_siswa]|max_size[file_foto_siswa,5120]|is_image[file_foto_siswa]',
+            'file_imunisasi' => 'uploaded[file_imunisasi]|max_size[file_imunisasi,5120]|ext_in[file_imunisasi,pdf,jpg,jpeg,png]',
+            'file_surat_sehat'=> 'uploaded[file_surat_sehat]|max_size[file_surat_sehat,5120]|ext_in[file_surat_sehat,pdf,jpg,jpeg,png]',
+            'file_ijazah_tk' => 'permit_empty|max_size[file_ijazah_tk,5120]|ext_in[file_ijazah_tk,pdf,jpg,jpeg,png]',
+            'file_pernyataan'=> 'uploaded[file_pernyataan]|max_size[file_pernyataan,5120]|ext_in[file_pernyataan,pdf,jpg,jpeg,png]',
         ];
 
         $messages = [
@@ -128,20 +157,21 @@ class Ppdb extends BaseController
                 'min_length' => 'NIK Orang Tua harus 16 digit.',
                 'max_length' => 'NIK Orang Tua harus 16 digit.'
             ],
+            'jalur_pendaftaran' => ['required' => 'Silakan pilih jalur pendaftaran.'],
             'tgl_lahir'    => ['valid_date' => 'Format tanggal lahir tidak valid (gunakan pemilih tanggal).'],
             'email'        => ['valid_email' => 'Format email orang tua tidak valid.'],
-            'alamat'       => ['min_length' => 'Alamat lengkap minimal 10 karakter.'],
-            'file_akta'    => ['uploaded' => 'File Akta Kelahiran wajib diunggah.', 'max_size' => 'Ukuran file Akta maksimal 2MB.'],
-            'file_kk'      => ['uploaded' => 'File Kartu Keluarga wajib diunggah.'],
-            'file_ktp_ortu'=> ['uploaded' => 'File KTP Orang Tua wajib diunggah.'],
-            'file_foto_siswa'=> ['uploaded' => 'Pas foto siswa wajib diunggah.'],
-            'file_imunisasi' => ['uploaded' => 'File Kartu Imunisasi wajib diunggah.'],
-            'file_surat_sehat'=> ['uploaded' => 'Surat Keterangan Sehat wajib diunggah.'],
-            'file_pernyataan'=> ['uploaded' => 'Surat Pernyataan Orang Tua wajib diunggah.'],
+            'alamat'       => ['min_length' => 'Alamat lengkap minimal 10 karakter.'], // Pesan ini tidak berubah
+            'file_akta'    => ['uploaded' => 'File Akta Kelahiran wajib diunggah.', 'max_size' => 'Ukuran file Akta maksimal 5MB.'],
+            'file_kk'      => ['uploaded' => 'File Kartu Keluarga wajib diunggah.', 'max_size' => 'Ukuran file KK maksimal 5MB.'],
+            'file_ktp_ortu'=> ['uploaded' => 'File KTP Orang Tua wajib diunggah.', 'max_size' => 'Ukuran file KTP maksimal 5MB.'],
+            'file_foto_siswa'=> ['uploaded' => 'Pas foto siswa wajib diunggah.', 'max_size' => 'Ukuran pas foto maksimal 5MB.'],
+            'file_imunisasi' => ['uploaded' => 'File Kartu Imunisasi wajib diunggah.', 'max_size' => 'Ukuran file Imunisasi maksimal 5MB.'],
+            'file_surat_sehat'=> ['uploaded' => 'Surat Keterangan Sehat wajib diunggah.', 'max_size' => 'Ukuran file Surat Sehat maksimal 5MB.'],
+            'file_pernyataan'=> ['uploaded' => 'Surat Pernyataan Orang Tua wajib diunggah.', 'max_size' => 'Ukuran file Pernyataan maksimal 5MB.'],
         ];
 
         if (! $this->validate($rules, $messages)) {
-            return redirect()->to('/ppdb#form-daftar')
+            return redirect()->to('/ppdb/daftar')
                 ->with('error', implode('<br>', $this->validator->getErrors()))
                 ->withInput();
         }
@@ -149,7 +179,7 @@ class Ppdb extends BaseController
         // Cek email belum terdaftar di tahun yang sama
         $tahun = date('Y');
         if ($this->model->sudahDaftar($this->request->getPost('email'), $tahun)) {
-            return redirect()->to('/ppdb#form-daftar')
+            return redirect()->to('/ppdb/daftar')
                 ->with('error', 'Email ini sudah digunakan untuk mendaftar PPDB tahun ' . $tahun . '.')
                 ->withInput();
         }
@@ -175,6 +205,7 @@ class Ppdb extends BaseController
             'kode_pos'     => $this->request->getPost('kode_pos'),
             'hubungan'     => $this->request->getPost('hubungan'),
             'asal'         => $this->request->getPost('asal_sekolah') ?: '-',
+            'jalur_pendaftaran' => $this->request->getPost('jalur_pendaftaran'),
             'usia'         => (int) $this->request->getPost('usia'),
             'status'       => 'Menunggu',
             'tgl_daftar'   => date('Y-m-d'),
@@ -196,7 +227,7 @@ class Ppdb extends BaseController
         }
 
         if (! $this->model->insert($dataInsert)) {
-            return redirect()->to('/ppdb#form-daftar')
+            return redirect()->to('/ppdb/daftar')
                 ->with('error', 'Gagal menyimpan ke database: ' . implode(', ', $this->model->errors()))
                 ->withInput();
         }
@@ -204,7 +235,33 @@ class Ppdb extends BaseController
         $insertID = $this->model->getInsertID();
         $noPendaftaran = 'PPDB-' . date('Ymd') . '-' . str_pad($insertID, 4, '0', STR_PAD_LEFT);
 
+        // 1. Kirim Notifikasi Background menggunakan helper dari BaseController
+        $pesanWa = $this->generatePpdbMessage($dataInsert['nama_ortu'], $dataInsert['nama'], 'Menunggu', $noPendaftaran);
+        $this->sendWhatsapp($this->formatPhoneNumber($dataInsert['telepon']), $pesanWa);
+
+        // 2. Buat Link Konfirmasi Manual untuk ditampilkan di web (Click to Chat)
+        $linkKonfirmasi = $this->getWhatsappLink($this->data['site_wa'], "Halo Admin, saya baru saja mendaftar PPDB Online.\n\nNama Siswa: {$dataInsert['nama']}\nNo. Pendaftaran: {$noPendaftaran}\n\nMohon bantuannya untuk verifikasi berkas. Terima kasih.");
+
         return redirect()->to('/ppdb')
-            ->with('success', 'Pendaftaran berhasil dikirim! No. Pendaftaran Anda: <strong>' . $noPendaftaran . '</strong>. <br><br> <a href="'.base_url('ppdb/cetak/'.$insertID).'" target="_blank" class="btn-hero-p" style="padding:8px 16px; font-size:13px;">🖨️ Cetak Bukti Pendaftaran (PDF)</a>');
+            ->with('success', 'Pendaftaran berhasil dikirim! No. Pendaftaran Anda: <strong>' . $noPendaftaran . '</strong>.' . 
+                '<br><br>' . 
+                '<a href="'.base_url('ppdb/cetak/'.$insertID).'" target="_blank" class="btn-hero-p" style="padding:8px 16px; font-size:13px; margin-right:5px;">🖨️ Cetak Bukti</a>' .
+                '<a href="'.$linkKonfirmasi.'" target="_blank" class="btn-hero-s" style="padding:8px 16px; font-size:13px; color:#25D366; border-color:#25D366;">💬 Konfirmasi via WA</a>'
+            );
+    }
+
+    /**
+     * Melayani request file upload PPDB agar tidak 404
+     */
+    public function serveFile(string $filename)
+    {
+        $path = FCPATH . 'uploads/ppdb/' . $filename;
+
+        if (! is_file($path)) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("File $filename tidak ditemukan.");
+        }
+
+        // Mengalirkan file ke browser (inline) dengan mime-type yang sesuai
+        return $this->response->download($path, null)->inline();
     }
 }
