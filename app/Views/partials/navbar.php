@@ -5,7 +5,7 @@
 ?>
 <nav class="navbar" id="navbar">
     <div class="nav-brand">
-        <img class="nav-logo" src="<?= base_url('assets/img/logo.png') ?>" alt="Logo SDN 56">
+        <img class="nav-logo" src="<?= $logo_url ?>" alt="Logo SDN 56">
         <div class="nav-name">
         <strong>SD Negeri 56 Prabumulih</strong>
         <span>Cerdas · Berkarakter · Berprestasi</span>

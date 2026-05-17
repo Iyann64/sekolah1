@@ -15,13 +15,13 @@
     <meta property="og:type"        content="website">
     <meta property="og:title"       content="<?= esc($title ?? 'Beranda') ?> – SD Negeri 56 Prabumulih">
     <meta property="og:description" content="<?= esc($meta_desc ?? 'Website resmi SD Negeri 56 Prabumulih') ?>">
-    <meta property="og:image"       content="<?= base_url('assets/img/logo.png') ?>">
+    <meta property="og:image"       content="<?= $logo_url ?>">
     <meta property="og:url"         content="<?= current_url() ?>">
     <meta property="og:site_name"   content="SD Negeri 56 Prabumulih">
 
     <!-- ── Favicon ── -->
-    <link rel="icon"       type="image/png" href="<?= base_url('assets/img/logo.png') ?>">
-    <link rel="apple-touch-icon"             href="<?= base_url('assets/img/logo.png') ?>">
+    <link rel="icon"       type="image/png" href="<?= $logo_url ?>">
+    <link rel="apple-touch-icon"             href="<?= $logo_url ?>">
 
     <!-- ── Google Fonts ── -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

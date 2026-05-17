@@ -3,7 +3,7 @@
     <div class="footer-grid">
         <div>
         <div class="fb-row">
-            <img class="fb-logo" src="<?= base_url('assets/img/logo.png') ?>" alt="Logo">
+            <img class="fb-logo" src="<?= $logo_url ?>" alt="Logo">
             <div class="fb-nm">SD Negeri 56<br>Prabumulih</div>
         </div>
         <p class="fb-desc">Sekolah dasar negeri yang berkomitmen mendidik generasi unggul, berkarakter Pancasila, dan siap menghadapi tantangan masa depan.</p>

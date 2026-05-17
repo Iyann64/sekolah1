@@ -37,7 +37,7 @@ abstract class BaseController extends Controller
             'site_phone'   => '(0713) 123-4567',
             'site_wa'      => '6281234567890',
             'site_address' => 'Jl. Pendidikan No. 56, Prabumulih, Sumatera Selatan 31124',
-            'logo_url'     => base_url('assets/img/logo.png'),
+            'logo_url'     => base_url('images/logo-website.png'),
             'upload_url'   => base_url('uploads/'), 
         ];
     }
@@ -56,6 +56,11 @@ abstract class BaseController extends Controller
         $data['content_view'] = $page;
         return view('layouts/main', $data);
     }
+
+    // Tips: Jika Web Admin nanti butuh log aktivitas saat config diubah,
+    // Anda bisa menambahkan metode logActivity($user_id, $action) di sini 
+    // agar semua Controller Admin yang mewarisi BaseController bisa mencatat 
+    // siapa yang mengubah jadwal atau config PPDB.
 
     /**
      * Menghasilkan template pesan WhatsApp berdasarkan status PPDB

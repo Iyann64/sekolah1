@@ -39,7 +39,10 @@
         <div class="ppdb-chips">
         <div class="ppdb-chip"><div class="pc-lbl">Dibuka</div><div class="pc-val"><?= esc($config['tgl_buka']) ?></div></div>
         <div class="ppdb-chip"><div class="pc-lbl">Ditutup</div><div class="pc-val"><?= esc($config['tgl_tutup']) ?></div></div>
-        <div class="ppdb-chip"><div class="pc-lbl">Kuota</div><div class="pc-val"><?= esc($config['kuota']) ?></div></div>
+        <div class="ppdb-chip"><div class="pc-lbl">Total Kuota</div><div class="pc-val"><?= esc($config['kuota']) ?></div></div>
+        <div class="ppdb-chip"><div class="pc-lbl">Afirmasi</div><div class="pc-val"><?= esc($config['kuota_afirmasi'] ?? 0) ?></div></div>
+        <div class="ppdb-chip"><div class="pc-lbl">Mutasi</div><div class="pc-val"><?= esc($config['kuota_mutasi'] ?? 0) ?></div></div>
+        <div class="ppdb-chip"><div class="pc-lbl">Domisili</div><div class="pc-val"><?= esc($config['kuota_domisili'] ?? 0) ?></div></div>
         <div class="ppdb-chip"><div class="pc-lbl">Usia</div><div class="pc-val"><?= esc($config['usia_text']) ?></div></div>
         </div>
     </div>
