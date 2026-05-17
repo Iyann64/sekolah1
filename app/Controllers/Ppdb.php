@@ -44,6 +44,7 @@ class Ppdb extends BaseController
         $nik = $this->request->getGet('nik');
         $siswa = null;
         $config = $this->getConfig();
+        $dokumen = $this->dokumenModel->getDaftar();
 
         if ($nik) {
             $siswa = $this->model->where('nik_siswa', $nik)->first();
@@ -53,9 +54,10 @@ class Ppdb extends BaseController
         }
 
         return $this->render('pages/ppdb', [
-            'title'  => 'Cek Status PPDB',
-            'config' => $config,
-            'siswa'  => $siswa
+            'title'    => 'Cek Status PPDB',
+            'config'   => $config,
+            'dokumen'  => $dokumen,
+            'siswa'    => $siswa
         ]);
     }
 
@@ -82,9 +84,11 @@ class Ppdb extends BaseController
     public function form(): string
     {
         $config = $this->getConfig();
+        $dokumen = $this->dokumenModel->getDaftar();
         return $this->render('pages/ppdb_form', [
-            'title'  => 'Formulir Pendaftaran PPDB',
-            'config' => $config,
+            'title'   => 'Formulir Pendaftaran PPDB',
+            'config'  => $config,
+            'dokumen' => $dokumen,
         ]);
     }
 
@@ -94,9 +98,11 @@ class Ppdb extends BaseController
     public function index(): string
     {
         $config = $this->getConfig();
+        $dokumen = $this->dokumenModel->getDaftar();
         return $this->render('pages/ppdb', [
-            'title'  => 'PPDB 2026/2027',
-            'config' => $config,
+            'title'   => 'PPDB 2026/2027',
+            'config'  => $config,
+            'dokumen' => $dokumen,
         ]);
     }
 

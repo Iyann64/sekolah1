@@ -39,10 +39,11 @@
         <div class="ppdb-chips">
         <div class="ppdb-chip"><div class="pc-lbl">Dibuka</div><div class="pc-val"><?= esc($config['tgl_buka']) ?></div></div>
         <div class="ppdb-chip"><div class="pc-lbl">Ditutup</div><div class="pc-val"><?= esc($config['tgl_tutup']) ?></div></div>
-        <div class="ppdb-chip"><div class="pc-lbl">Total Kuota</div><div class="pc-val"><?= esc($config['kuota']) ?></div></div>
-        <div class="ppdb-chip"><div class="pc-lbl">Afirmasi</div><div class="pc-val"><?= esc($config['kuota_afirmasi'] ?? 0) ?></div></div>
-        <div class="ppdb-chip"><div class="pc-lbl">Mutasi</div><div class="pc-val"><?= esc($config['kuota_mutasi'] ?? 0) ?></div></div>
-        <div class="ppdb-chip"><div class="pc-lbl">Domisili</div><div class="pc-val"><?= esc($config['kuota_domisili'] ?? 0) ?></div></div>
+        <div class="ppdb-chip"><div class="pc-lbl">Kuota</div><div class="pc-val"><?= esc($config['kuota']) ?></div></div>
+        <div class="ppdb-chip"><div class="pc-lbl">Usia</div><div class="pc-val"><?= esc($config['usia_text']) ?></div></div>
+        </div>
+    </div>
+    </section>
         <div class="ppdb-chip"><div class="pc-lbl">Usia</div><div class="pc-val"><?= esc($config['usia_text']) ?></div></div>
         </div>
     </div>
@@ -71,10 +72,13 @@
         <!-- Dokumen Wajib -->
         <div class="card" style="background:var(--white);border-radius:18px;padding:28px;box-shadow:0 4px 24px rgba(0,96,100,.08)">
         <div style="font-size:32px;margin-bottom:12px">📄</div>
-        <div style="font-weight:700;font-size:16px;color:var(--ink);margin-bottom:12px">Dokumen Wajib</div>
+        <div style="font-weight:700;font-size:16px;color:var(--ink);margin-bottom:12px">Dokumen Wajib Daftar Ulang</div>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:10px">
-            <?php foreach (['Akta Kelahiran (fotokopi)','Kartu Keluarga (fotokopi)','KTP/NIK Orang Tua/Wali','Kartu Imunisasi Anak','Surat Keterangan Sehat dari Dokter/Puskesmas','Foto 3×4 (4 lembar)','Ijazah / STTB TK (jika ada)','Surat Pernyataan dari Orang Tua/Wali'] as $dok): ?>
-            <li style="display:flex;gap:10px;font-size:14px;color:var(--gray)"><span style="color:var(--c3);flex-shrink:0">📌</span><?= esc($dok) ?></li>
+            <?php 
+            $dokumen_tampil = isset($dokumen) ? array_filter($dokumen, fn($d) => $d['wajib']) : [];
+            foreach ($dokumen_tampil as $dok): 
+            ?>
+            <li style="display:flex;gap:10px;font-size:14px;color:var(--gray)"><span style="color:var(--c3);flex-shrink:0">📌</span><?= esc($dok['nama']) ?></li>
             <?php endforeach; ?>
         </ul>
         </div>

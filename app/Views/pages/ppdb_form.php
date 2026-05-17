@@ -17,6 +17,18 @@
 
     <div id="wrapper-form" style="max-width:720px;margin:0 auto;background:var(--white);border-radius:20px;padding:clamp(24px,6vw,40px);box-shadow:0 8px 40px rgba(0,96,100,.1);border:1px solid rgba(0,188,212,.08)">
 
+        <!-- Instruksi Dokumen -->
+        <?php if (!empty($dokumen)): ?>
+        <div style="background:#E3F2FD;border-left:4px solid #1976D2;padding:14px 16px;border-radius:8px;margin-bottom:24px">
+            <div style="font-weight:700;color:#1976D2;font-size:13px;margin-bottom:8px">📋 Dokumen yang Harus Disiapkan:</div>
+            <ul style="margin:0;padding-left:20px;font-size:12px;color:#0D47A1;line-height:1.6">
+                <?php foreach ($dokumen as $d): ?>
+                <li><?= esc($d['nama']) ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        <?php endif; ?>
+
         <form action="<?= base_url('ppdb/daftar') ?>" method="POST" enctype="multipart/form-data">
         <?= csrf_field() ?>
 
