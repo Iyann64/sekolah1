@@ -37,7 +37,7 @@ abstract class BaseController extends Controller
             'site_phone'   => '(0713) 123-4567',
             'site_wa'      => '6281234567890',
             'site_address' => 'Jl. Pendidikan No. 56, Prabumulih, Sumatera Selatan 31124',
-            'logo_url'     => base_url('images/logo-website.png'),
+            'logo_url'     => base_url('images/logo-website-removebg-preview.png'),
             'upload_url'   => base_url('uploads/'), 
         ];
     }

@@ -10,6 +10,7 @@
         <div class="hero-btns">
         <a href="<?= base_url('ppdb/daftar') ?>" class="btn-hero-p">✏️ Daftar Sekarang</a>
         <a href="#syarat"      class="btn-hero-s">📋 Lihat Persyaratan</a>
+        <a href="#cek-status"  class="btn-hero-s">🔍 Cek Status</a>
         </div>
     </div>
     </section>
