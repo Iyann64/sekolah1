@@ -20,7 +20,7 @@
         <!-- Instruksi Dokumen -->
         <?php if (!empty($dokumen)): ?>
         <div style="background:#E3F2FD;border-left:4px solid #1976D2;padding:14px 16px;border-radius:8px;margin-bottom:24px">
-            <div style="font-weight:700;color:#1976D2;font-size:13px;margin-bottom:8px">📋 Dokumen yang Harus Disiapkan:</div>
+            <div style="font-weight:700;color:#1976D2;font-size:13px;margin-bottom:8px">📋 Dokumen yang harus disiapkan saat daftar ulang:</div>
             <ul style="margin:0;padding-left:20px;font-size:12px;color:#0D47A1;line-height:1.6">
                 <?php foreach ($dokumen as $d): ?>
                 <li><?= esc($d['nama']) ?></li>
@@ -148,7 +148,7 @@
                     <option value="Wali" <?= old('hubungan') == 'Wali' ? 'selected' : '' ?>>Wali</option>
                 </select>
             </div>
-        </div>
+        </div> 
         <div class="form-row" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:16px">
             <div class="fg" style="margin-bottom:0">
             <label style="display:block;font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px">No. Telepon/WhatsApp *</label>
