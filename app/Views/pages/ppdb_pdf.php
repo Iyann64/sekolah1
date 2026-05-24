@@ -8,7 +8,9 @@
         body { font-family: Arial, sans-serif; color: #333; line-height: 1.4; background: #fff; font-size: 13px; padding: 15px; }
         
         /* Header */
-        .header-title { text-align: center; margin-bottom: 15px; border-bottom: 3px solid #4caf50; padding-bottom: 10px; }
+        .header-title { position: relative; text-align: center; margin-bottom: 15px; border-bottom: 3px solid #4caf50; padding: 0 80px 10px; min-height: 70px; }
+        .logo-left { position: absolute; left: 0; top: 0; width: 65px; height: 65px; object-fit: contain; }
+        .logo-right { position: absolute; right: 0; top: 0; width: 65px; height: 65px; object-fit: contain; }
         .school-name { font-size: 14px; font-weight: bold; text-transform: uppercase; color: #333; }
         .header-subtitle { font-size: 12px; color: #666; margin-top: 2px; }
         .separator { height: 2px; background: #4caf50; margin: 8px 0; }
@@ -59,6 +61,8 @@
 <body onload="window.print()">
     <!-- Header -->
     <div class="header-title">
+        <img src="<?= $logo_url ?>" class="logo-left" alt="Logo Kiri">
+        <img src="<?= $logo_url ?>" class="logo-right" alt="Logo Kanan">
         <div class="school-name"><?= esc($site_name) ?></div>
         <div class="header-subtitle">PENGUMUMAN HASIL SPMB 2026/2027</div>
         <div style="font-size: 11px; color: #999; margin-top: 3px;">Sistem Penerimaan Siswa Baru</div>

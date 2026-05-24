@@ -183,7 +183,7 @@
                         <a href="<?= $waLink ?>" target="_blank" class="btn-hero-s" style="padding:10px; border-radius:10px; font-size:13px; text-align:center; color:#25D366; border-color:#25D366;">
                             💬 Tanya Admin
                         </a>
-                        <a href="<?= base_url('ppdb/cetak/'.$siswa['id']) ?>" target="_blank" class="btn-hero-p" style="padding:10px; border-radius:10px; font-size:13px; text-align:center;">
+                        <a href="<?= base_url('ppdb/cetak/'.$siswa['id_ppdb']) ?>" target="_blank" class="btn-hero-p" style="padding:10px; border-radius:10px; font-size:13px; text-align:center;">
                             🖨️ Cetak Bukti Pendaftaran
                         </a>
                     </div>

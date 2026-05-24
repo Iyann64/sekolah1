@@ -14,7 +14,7 @@ use CodeIgniter\Model;
 class GaleriModel extends Model
 {
     protected $table          = 'galeri';
-    protected $primaryKey     = 'id';
+    protected $primaryKey     = 'id_galeri';
     protected $returnType     = 'array';
     protected $useSoftDeletes = true;
 

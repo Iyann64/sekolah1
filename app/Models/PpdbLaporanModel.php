@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class PpdbLaporanModel extends Model
 {
     protected $table          = 'ppdb_laporan_tahunan';
-    protected $primaryKey     = 'id';
+    protected $primaryKey     = 'id_ppdb_laporan_tahunan';
     protected $returnType     = 'array';
     protected $allowedFields  = [
         'tahun_ajaran', 'total_pendaftar', 'total_diterima', 'total_ditolak',
