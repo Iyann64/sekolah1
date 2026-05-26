@@ -33,11 +33,12 @@ abstract class BaseController extends Controller
         $this->data = [
             'site_name'    => 'SD Negeri 56 Prabumulih',
             'site_tagline' => 'Cerdas · Berkarakter · Berprestasi',
-            'site_email'   => 'sdnegeri56pbm@gmail.com',
+            'site_email'   => 'sdn56prabumulih@gmail.com',
             'site_phone'   => '(0713) 123-4567',
-            'site_wa'      => '6281234567890',
+            'site_wa'      => '+62 822-8146-3958',
             'site_address' => 'Jl. Pendidikan No. 56, Prabumulih, Sumatera Selatan 31124',
             'logo_url'     => base_url('images/logo-website-removebg-preview.png'),
+            'logo2_url'  => base_url('images/LOGO-KOTA-PRABUMULIH-768x1034.png'),
             'upload_url'   => base_url('uploads/'), 
         ];
     }

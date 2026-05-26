@@ -49,14 +49,7 @@
         </div>
         </div>
         <?php endforeach; else: ?>
-        <!-- Fallback statis jika DB kosong -->
-        <div class="gi gi1" style="background:linear-gradient(135deg,#006064,#00838F)">🏫<div class="gi-ov"><div class="gi-cap">Gedung SDN 56 Prabumulih</div></div></div>
-        <div class="gi gi2" style="background:linear-gradient(135deg,#004D40,#00695C)">🏆<div class="gi-ov"><div class="gi-cap">Olimpiade Sains 2026</div></div></div>
-        <div class="gi gi3" style="background:linear-gradient(135deg,#0D47A1,#1565C0)">🎭<div class="gi-ov"><div class="gi-cap">Pentas Seni Tahunan</div></div></div>
-        <div class="gi gi4" style="background:linear-gradient(135deg,#4A148C,#6A1B9A)">⚽<div class="gi-ov"><div class="gi-cap">Turnamen Futsal Antar Kelas</div></div></div>
-        <div class="gi gi5" style="background:linear-gradient(135deg,#B71C1C,#C62828)">🌱<div class="gi-ov"><div class="gi-cap">Program Adiwiyata</div></div></div>
-        <div class="gi gi6" style="background:linear-gradient(135deg,#E65100,#EF6C00)">🎓<div class="gi-ov"><div class="gi-cap">Wisuda Kelas 6 · 2025</div></div></div>
-        <div class="gi gi7" style="background:linear-gradient(135deg,#1B5E20,#2E7D32)">📚<div class="gi-ov"><div class="gi-cap">Perpustakaan Sekolah</div></div></div>
+
         <?php endif; ?>
     </div>
     </section>

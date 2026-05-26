@@ -1,6 +1,6 @@
     
     <!-- ════════ HERO ════════ -->
-    <section class="hero" id="beranda">
+    <section class="hero" id="beranda" style="background: linear-gradient(rgba(0, 97, 100, 0.39), rgba(0, 26, 28, 0.8)), url('<?= base_url('images/sdn56-prabumulih.jpeg') ?>') center/cover no-repeat;">
     <div class="hero-grid"></div>
     <div class="orb1 hero-orb"></div>
     <div class="orb2 hero-orb"></div>
@@ -252,8 +252,13 @@
     <!-- ════════ GALERI ════════ -->
     <section class="galeri" id="galeri">
     <div class="reveal">
-        <div class="tag">Galeri</div>
-        <h2 class="sec-title">Momen <em style="color:var(--c3)">Terbaik</em> Kami</h2>
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; margin-bottom: 32px;">
+            <div>
+                <div class="tag">Galeri</div>
+                <h2 class="sec-title" style="margin-bottom: 0;">Momen <em style="color:var(--c3)">Terbaik</em> Kami</h2>
+            </div>
+            <a href="<?= base_url('galeri') ?>" class="btn-hero-s" style="padding: 10px 24px; font-size: 14px;">Lihat Semua Galeri →</a>
+        </div>
     </div>
     <div class="gal-filter reveal">
         <button class="gf active" onclick="filterGal(this,'all')">Semua</button>
@@ -281,15 +286,11 @@
             <div class="gi-ov" style="z-index:1"><div class="gi-cap"><?= esc($g['nama']) ?></div></div>
         </div>
         <?php endforeach; else: ?>
-        <!-- Fallback statis -->
-        <div class="gi gi1">🏫<div class="gi-ov"><div class="gi-cap">Gedung SDN 56 Prabumulih</div></div></div>
-        <div class="gi gi2">🏆<div class="gi-ov"><div class="gi-cap">Olimpiade Sains Kota 2026</div></div></div>
-        <div class="gi gi3">🎭<div class="gi-ov"><div class="gi-cap">Pentas Seni Tahunan</div></div></div>
-        <div class="gi gi4">⚽<div class="gi-ov"><div class="gi-cap">Turnamen Futsal Antar Kelas</div></div></div>
-        <div class="gi gi5">🌱<div class="gi-ov"><div class="gi-cap">Program Adiwiyata</div></div></div>
-        <div class="gi gi6">🎓<div class="gi-ov"><div class="gi-cap">Wisuda Kelas 6 · 2025</div></div></div>
-        <div class="gi gi7">📚<div class="gi-ov"><div class="gi-cap">Perpustakaan Sekolah</div></div></div>
         <?php endif; ?>
+    </div>
+
+    <div style="text-align: center; margin-top: 48px;" class="reveal d2">
+        <a href="<?= base_url('galeri') ?>" class="btn-hero-p" style="display: inline-flex;">🖼️ Lihat Seluruh Dokumentasi →</a>
     </div>
     </section>
 

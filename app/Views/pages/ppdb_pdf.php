@@ -61,7 +61,7 @@
 <body onload="window.print()">
     <!-- Header -->
     <div class="header-title">
-        <img src="<?= $logo_url ?>" class="logo-left" alt="Logo Kiri">
+        <img src="<?= $logo2_url ?>" class="logo-left" alt="Logo Kiri">
         <img src="<?= $logo_url ?>" class="logo-right" alt="Logo Kanan">
         <div class="school-name"><?= esc($site_name) ?></div>
         <div class="header-subtitle">PENGUMUMAN HASIL SPMB 2026/2027</div>
