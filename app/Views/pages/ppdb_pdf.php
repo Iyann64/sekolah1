@@ -16,7 +16,9 @@
         .separator { height: 2px; background: #4caf50; margin: 8px 0; }
         
         /* Info table */
-        .info-table { width: 100%; margin: 15px 0; border-collapse: collapse; }
+        .info-container { display: flex; justify-content: space-between; align-items: flex-start; margin: 15px 0; }
+        .info-table { width: 75%; border-collapse: collapse; }
+        .student-photo { width: 100px; height: 130px; border: 2px solid #eee; object-fit: cover; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .info-table td { padding: 6px 8px; border-bottom: 1px solid #eee; vertical-align: top; }
         .info-table .label { width: 25%; font-weight: bold; color: #555; }
         .info-table .value { font-weight: 600; }
@@ -70,20 +72,27 @@
     <div class="separator"></div>
 
     <!-- Student Info -->
-    <table class="info-table">
-        <tr>
-            <td class="label">Nama Lengkap</td>
-            <td class="value"><?= esc($siswa['nama']) ?></td>
-        </tr>
-        <tr>
-            <td class="label">NIK</td>
-            <td class="value"><?= esc($siswa['nik_siswa']) ?></td>
-        </tr>
-        <tr>
-            <td class="label">Status</td>
-            <td class="value"><span style="color: #4caf50; font-weight: bold;"><?= esc($siswa['status']) ?></span></td>
-        </tr>
-    </table>
+    <div class="info-container">
+        <table class="info-table">
+            <tr>
+                <td class="label">Nama Lengkap</td>
+                <td class="value"><?= esc($siswa['nama']) ?></td>
+            </tr>
+            <tr>
+                <td class="label">NIK</td>
+                <td class="value"><?= esc($siswa['nik_siswa']) ?></td>
+            </tr>
+            <tr>
+                <td class="label">Status</td>
+                <td class="value"><span style="color: #4caf50; font-weight: bold;"><?= esc($siswa['status']) ?></span></td>
+            </tr>
+        </table>
+        <?php if (!empty($siswa['file_foto_siswa'])): ?>
+            <img src="<?= $upload_url . 'ppdb/' . $siswa['file_foto_siswa'] ?>" class="student-photo" alt="Foto Siswa">
+        <?php else: ?>
+            <div class="student-photo" style="display: flex; align-items: center; justify-content: center; background: #f5f5f5; color: #ccc; font-size: 10px; text-align: center;">Pas Foto 3x4</div>
+        <?php endif; ?>
+    </div>
 
     <!-- Status Result Box -->
     <div class="status-box">

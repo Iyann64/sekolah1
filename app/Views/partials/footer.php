@@ -45,7 +45,9 @@
         <h4>Lokasi</h4>
         <p style="font-size: 14px; line-height: 1.6; color: #4285F4;">
             📍 Jl. Pendidikan No. 56<br>
-            Prabumulih, Sumsel 31124
+            Prabumulih, Sumsel 31111<br>
+            Indonesia<br>
+            <br>
         </p>
         <a href="https://maps.google.com/?q=SD+Negeri+56+Prabumulih" target="_blank" style="display: inline-block; margin-top: 8px; padding: 8px 12px; background-color: #4285F4; color: white; text-decoration: none; border-radius: 4px; font-size: 13px;">
             Buka di Google Maps

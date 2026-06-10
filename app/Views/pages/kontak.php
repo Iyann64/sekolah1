@@ -22,8 +22,8 @@
 
         <!-- Mobile quick contact -->
         <div class="mobile-cta">
-            <a href="https://wa.me/<?= esc($site_wa) ?>" class="mc-btn mc-wa">💬 WhatsApp</a>
-            <a href="tel:<?= esc($site_phone) ?>" class="mc-btn mc-tel">📞 Telepon</a>
+            <a href="https://wa.me/+6282281463958" class="mc-btn mc-wa">💬 WhatsApp</a>
+            <a href="tel:+6282281463958" class="mc-btn mc-tel">📞 Telepon</a>
         </div>
 
         <div class="k-items">
@@ -32,7 +32,7 @@
             <div>
                 <div class="k-lbl">Alamat</div>
                 <div class="k-val"><?= esc($site_address) ?></div>
-                <div class="k-sub">Sumatera Selatan 31124, Indonesia</div>
+                <div class="k-sub">Sumatera Selatan 31111, Indonesia</div>
             </div>
             </div>
             <div class="k-row">
@@ -55,7 +55,7 @@
             <div class="k-icon">📱</div>
             <div>
                 <div class="k-lbl">WhatsApp</div>
-                <div class="k-val"><a href="https://wa.me/<?= esc($site_wa) ?>">+62 822-8146-3958</a></div>
+                <div class="k-val"><a href="https://wa.me/+6282281463958">+62 822-8146-3958</a></div>
                 <div class="k-sub">Chat langsung dengan TU Sekolah</div>
             </div>
             </div>

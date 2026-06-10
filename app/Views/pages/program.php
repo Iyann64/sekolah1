@@ -18,10 +18,26 @@
         <p class="sec-sub">Semua informasi dan layanan sekolah kini mudah diakses secara digital oleh siswa, orang tua, dan masyarakat.</p>
     </div>
     <div class="smart-grid">
-        <div class="sc reveal d2"><div class="sc-ic sci2">📋</div><div class="sc-title">PPDB Online</div><div class="sc-desc">Daftar siswa baru online</div></div>
-        <div class="sc reveal d4"><div class="sc-ic sci4">📢</div><div class="sc-title">Pengumuman</div><div class="sc-desc">Info & pengumuman terkini</div></div>
-        <div class="sc reveal d3"><div class="sc-ic sci3">📅</div><div class="sc-title">Kalender Akademik</div><div class="sc-desc">Jadwal kegiatan sekolah</div></div>
-        <div class="sc reveal d4"><div class="sc-ic sci8">💬</div><div class="sc-title">Konsultasi</div><div class="sc-desc">Tanya jawab dengan guru</div></div>
+        <a href="<?= base_url('ppdb') ?>" class="smart-card reveal">
+        <div class="smart-icon"><i class="fas fa-graduation-cap"></i></div>
+        <h3 class="smart-title">PPDB Online</h3>
+        <p class="smart-desc">Pendaftaran siswa baru online</p>
+        </a>
+        <a href="<?= base_url('kontak') ?>" class="smart-card reveal d1">
+        <div class="smart-icon"><i class="fas fa-comments"></i></div>
+        <h3 class="smart-title">Kontak Sekolah</h3>
+        <p class="smart-desc">Hubungi layanan kami</p>
+        </a>
+        <a href="<?= base_url('agenda') ?>" class="smart-card reveal d2">
+        <div class="smart-icon"><i class="fas fa-calendar-alt"></i></div>
+        <h3 class="smart-title">Agenda Sekolah</h3>
+        <p class="smart-desc">Kegiatan & acara mendatang</p>
+        </a>
+        <a href="<?= base_url('berita') ?>" class="smart-card reveal d3">
+        <div class="smart-icon"><i class="fas fa-newspaper"></i></div>
+        <h3 class="smart-title">Berita & Pengumuman</h3>
+        <p class="smart-desc">Informasi & berita terbaru</p>
+        </a>
     </div>
     </div>
 
@@ -92,10 +108,10 @@
         <h2 class="sec-title">Daftarkan Putra-Putri<br>Anda Sekarang!</h2>
         <p class="sec-sub">Penerimaan Peserta Didik Baru Tahun Ajaran 2026/2027 segera dibuka.</p>
         <div class="ppdb-chips">
-        <div class="ppdb-chip"><div class="pc-lbl">Dibuka</div><div class="pc-val">1 April 2026</div></div>
-        <div class="ppdb-chip"><div class="pc-lbl">Ditutup</div><div class="pc-val">31 Mei 2026</div></div>
-        <div class="ppdb-chip"><div class="pc-lbl">Kuota</div><div class="pc-val">4 Rombel</div></div>
-        <div class="ppdb-chip"><div class="pc-lbl">Usia</div><div class="pc-val">6–7 Tahun</div></div>
+        <div class="ppdb-chip"><div class="pc-lbl">Dibuka</div><div class="pc-val"><?= esc($config['tgl_buka'] ?? '1 April 2026') ?></div></div>
+        <div class="ppdb-chip"><div class="pc-lbl">Ditutup</div><div class="pc-val"><?= esc($config['tgl_tutup'] ?? '31 Mei 2026') ?></div></div>
+        <div class="ppdb-chip"><div class="pc-lbl">Kuota</div><div class="pc-val"><?= esc($config['kuota'] ?? '4 Rombel') ?></div></div>
+        <div class="ppdb-chip"><div class="pc-lbl">Usia</div><div class="pc-val"><?= esc($config['usia_text'] ?? '6–7 Tahun') ?></div></div>
         </div>
         <a href="<?= base_url('ppdb') ?>" class="btn-ppdb">✏️ Daftar PPDB 2026/2027 →</a>
     </div>

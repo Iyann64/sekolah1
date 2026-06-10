@@ -110,6 +110,43 @@
     <!-- Kanan: Sidebar agenda aktif mendatang -->
     <aside style="position:sticky;top:80px">
 
+      <!-- Kalender Widget -->
+      <div style="background:var(--white);border-radius:16px;padding:22px;box-shadow:0 2px 12px rgba(0,96,100,.06);margin-bottom:16px">
+        <div style="font-weight:800;font-size:13px;color:var(--ink);margin-bottom:16px">📅 Kalender Akademik</div>
+        <div class="cal-nav" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+            <a href="<?= base_url('agenda?bulan='.date('Y-m', strtotime($bulan_aktif.'-01 -1 month'))) ?>" style="cursor:pointer; color:var(--c2); font-weight:bold; font-size:18px;">‹</a>
+            <div style="font-weight:700; font-size:14px; color:var(--ink);"><?= date('F Y', strtotime($bulan_aktif.'-01')) ?></div>
+            <a href="<?= base_url('agenda?bulan='.date('Y-m', strtotime($bulan_aktif.'-01 +1 month'))) ?>" style="cursor:pointer; color:var(--c2); font-weight:bold; font-size:18px;">›</a>
+        </div>
+        <div class="cal-grid">
+            <div class="cal-dn">Min</div><div class="cal-dn">Sen</div><div class="cal-dn">Sel</div><div class="cal-dn">Rab</div><div class="cal-dn">Kam</div><div class="cal-dn">Jum</div><div class="cal-dn">Sab</div>
+            <?php
+            $firstDay = date('w', strtotime($bulan_aktif.'-01'));
+            $daysInMonth = date('t', strtotime($bulan_aktif.'-01'));
+            $today = date('Y-m-d');
+            
+            // Map events ke hari untuk pengecekan cepat
+            $eventDays = [];
+            foreach ($agenda_semua as $ag) {
+                $day = (int)date('d', strtotime($ag['tanggal']));
+                $eventDays[$day] = true;
+            }
+
+            // Padding untuk awal minggu
+            for ($i = 0; $i < $firstDay; $i++) echo '<div class="cal-d other"></div>';
+            
+            // Hari dalam bulan
+            for ($d = 1; $d <= $daysInMonth; $d++):
+                $currentDate = $bulan_aktif . '-' . str_pad($d, 2, '0', STR_PAD_LEFT);
+                $isToday = $currentDate === $today;
+                $hasEvent = isset($eventDays[$d]);
+                $class = 'cal-d' . ($isToday ? ' today' : '') . ($hasEvent ? ' event' : '');
+            ?>
+                <div class="<?= $class ?>" title="<?= $hasEvent ? 'Ada agenda di hari ini' : '' ?>"><?= $d ?></div>
+            <?php endfor; ?>
+        </div>
+      </div>
+
       <!-- Agenda Mendatang -->
       <div style="background:var(--white);border-radius:16px;padding:22px;box-shadow:0 2px 12px rgba(0,96,100,.06);margin-bottom:16px">
         <div style="font-weight:800;font-size:13px;color:var(--ink);margin-bottom:16px">🗓 Agenda Mendatang</div>

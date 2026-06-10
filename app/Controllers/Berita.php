@@ -67,13 +67,13 @@ class Berita extends BaseController
         }
 
         // Tambah counter views (+1)
-        $this->model->tambahViews($berita['id']);
+        $this->model->tambahViews($berita['id_berita']);
 
         return $this->render('pages/berita/detail', [
             'title'          => $berita['judul'],
             'berita'         => $berita,
             'berita_terkait' => $this->model->getTerkait(
-                id       : $berita['id'],
+                id       : $berita['id_berita'],
                 kategori : $berita['kategori'],
                 limit    : 3
             ),

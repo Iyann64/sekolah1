@@ -21,10 +21,6 @@
         <div class="hero-card">
         <div class="fl-badge fb1">
             <span class="fb-ic">🏆</span>
-            <div>
-            <div style="font-weight:700;font-size:12px">Juara 1 Olimpiade</div>
-            <div style="font-size:11px;color:var(--gray);font-weight:400">Sains Kota 2026</div>
-            </div>
         </div>
         <div class="hero-logo-ring">
             <img src="<?= $logo_url ?>" alt="Logo SDN 56">
@@ -33,16 +29,12 @@
         <div class="hc-loc">📍 Prabumulih, Sumsel</div>
         <div class="hc-stats">
             <div class="hcs"><div class="hcs-n">500+</div><div class="hcs-l">Siswa</div></div>
-            <div class="hcs"><div class="hcs-n">A+</div><div class="hcs-l">Akreditasi</div></div>
+            <div class="hcs"><div class="hcs-n">B</div><div class="hcs-l">Akreditasi</div></div>
             <div class="hcs"><div class="hcs-n">30+</div><div class="hcs-l">Guru</div></div>
             <div class="hcs"><div class="hcs-n">100%</div><div class="hcs-l">Lulus</div></div>
         </div>
         <div class="fl-badge fb2">
             <span class="fb-ic">⭐</span>
-            <div>
-            <div style="font-weight:700;font-size:12px">Akreditasi A+</div>
-            <div style="font-size:11px;color:var(--gray);font-weight:400">BAN-S/M 2024</div>
-            </div>
         </div>
         </div>
     </div>
@@ -53,23 +45,13 @@
     </div>
     </section>
 
-    <!-- ════════ STATS BAR ════════ -->
-    <div class="stats-bar">
-    <div class="stat-tile"><div class="stn" data-target="512">0</div><div class="stl">Siswa Aktif</div></div>
-    <div class="stat-tile"><div class="stn" data-target="32">0</div><div class="stl">Tenaga Pengajar</div></div>
-    <div class="stat-tile"><div class="stn" data-target="25">0</div><div class="stl">Tahun Berdiri</div></div>
-    <div class="stat-tile"><div class="stn" data-target="100">0</div><div class="stl">% Kelulusan</div></div>
-    <div class="stat-tile"><div class="stn" data-target="47">0</div><div class="stl">Prestasi Diraih</div></div>
-    <div class="stat-tile"><div class="stn" data-target="6">0</div><div class="stl">Ekstrakurikuler</div></div>
-    </div>
-
     <!-- ════════ TENTANG ════════ -->
     <section class="about" id="tentang">
     <div class="about-visual reveal">
         <div class="av-bg">
         <img class="av-logo" src="<?= $logo_url ?>" alt="Logo SDN 56">
         </div>
-        <div class="av-badge"><div class="avb-n">A+</div><div class="avb-t">Akreditasi BAN-S/M</div></div>
+        <div class="av-badge"><div class="avb-n">B</div><div class="avb-t">Akreditasi BAN-S/M</div></div>
         <div class="av-badge2"><div class="avb2-n">25+</div><div class="avb2-t">Tahun Berdiri</div></div>
     </div>
     <div class="reveal d1">
@@ -108,10 +90,26 @@
         <p class="sec-sub">Semua informasi dan layanan sekolah kini mudah diakses secara digital oleh siswa, orang tua, dan masyarakat.</p>
     </div>
     <div class="smart-grid">
-        <div class="sc reveal d2"><div class="sc-ic sci2">📋</div><div class="sc-title">PPDB Online</div><div class="sc-desc">Daftar siswa baru online</div></div>
-        <div class="sc reveal d3"><div class="sc-ic sci3">📅</div><div class="sc-title">Jadwal</div><div class="sc-desc">Jadwal harian & mingguan</div></div>
-        <div class="sc reveal d4"><div class="sc-ic sci4">📢</div><div class="sc-title">Pengumuman</div><div class="sc-desc">Info & pengumuman terkini</div></div>
-        <div class="sc reveal d4"><div class="sc-ic sci8">💬</div><div class="sc-title">Konsultasi</div><div class="sc-desc">Tanya jawab dengan guru</div></div>
+        <a href="<?= base_url('ppdb') ?>" class="sc reveal d1" style="text-decoration:none">
+            <div class="sc-ic sci1">📊</div>
+            <div class="sc-title">PPDB Online</div>
+            <div class="sc-desc">Pendaftaran siswa baru online</div>
+        </a>
+        <a href="<?= base_url('berita') ?>" class="sc reveal d2" style="text-decoration:none">
+            <div class="sc-ic sci2">📢</div>
+            <div class="sc-title">Pengumuman</div>
+            <div class="sc-desc">Informasi & berita terbaru</div>
+        </a>
+        <a href="<?= base_url('kontak') ?>" class="sc reveal d3" style="text-decoration:none">
+            <div class="sc-ic sci3">📞</div>
+            <div class="sc-title">Kontak Sekolah</div>
+            <div class="sc-desc">Hubungi layanan kami</div>
+        </a>
+        <a href="<?= base_url('agenda') ?>" class="sc reveal d4" style="text-decoration:none">
+            <div class="sc-ic sci4">📅</div>
+            <div class="sc-title">Agenda & Kalender</div>
+            <div class="sc-desc">Jadwal kegiatan akademik</div>
+        </a>
     </div>
     </div>
 
@@ -247,6 +245,50 @@
         </div>
         </div>
     </div>
+
+    <script>
+    let calCurDate = new Date();
+    function renderCal() {
+        const grid = document.getElementById('calGrid');
+        const label = document.getElementById('calLabel');
+        if(!grid || !label) return;
+        grid.innerHTML = '';
+        const y = calCurDate.getFullYear();
+        const m = calCurDate.getMonth();
+        label.innerText = new Intl.DateTimeFormat('id-ID', { month: 'short', year: 'numeric' }).format(calCurDate);
+        const first = new Date(y, m, 1).getDay();
+        const days = new Date(y, m + 1, 0).getDate();
+        const now = new Date();
+
+        ['Min','Sen','Sel','Rab','Kam','Jum','Sab'].forEach(d => {
+            let el = document.createElement('div'); el.className = 'cal-dn'; el.innerText = d; grid.appendChild(el);
+        });
+
+        for (let i = 0; i < first; i++) {
+            let el = document.createElement('div'); el.className = 'cal-d other'; grid.appendChild(el);
+        }
+
+        for (let d = 1; d <= days; d++) {
+            let el = document.createElement('div'); el.className = 'cal-d';
+            if (y === now.getFullYear() && m === now.getMonth() && d === now.getDate()) el.classList.add('today');
+            
+            // Cek apakah ada event dari data yang di-passing PHP
+            <?php if(!empty($agenda_aktif)): foreach($agenda_aktif as $ag): ?>
+            if (y === <?= (int)date('Y', strtotime($ag['tanggal'])) ?> && 
+                m === <?= (int)date('m', strtotime($ag['tanggal'])) - 1 ?> && 
+                d === <?= (int)date('d', strtotime($ag['tanggal'])) ?>) {
+                el.classList.add('event');
+                el.title = "<?= esc($ag['judul']) ?>";
+            }
+            <?php endforeach; endif; ?>
+
+            el.innerText = d;
+            grid.appendChild(el);
+        }
+    }
+    function calMove(s) { calCurDate.setMonth(calCurDate.getMonth() + s); renderCal(); }
+    document.addEventListener('DOMContentLoaded', renderCal);
+    </script>
     </section>
 
     <!-- ════════ GALERI ════════ -->
@@ -309,58 +351,7 @@
             if (isVisible && firstVisible) { el.classList.add('featured'); firstVisible = false; }
         });
     }
-    </script>
-
-    <!-- ════════ PRESTASI ════════ -->
-    <section class="prestasi">
-    <div style="text-align:center;margin-bottom:48px" class="reveal">
-        <div class="tag">Kebanggaan Kami</div>
-        <h2 class="sec-title">Prestasi <em>Gemilang</em></h2>
-        <p class="sec-sub" style="margin:0 auto">Ratusan penghargaan dari berbagai ajang kompetisi bergengsi tingkat kota, provinsi, dan nasional.</p>
-    </div>
-    <div class="prest-grid">
-        <div class="prest-card reveal">   <span class="pm">🥇</span><div class="py">2026</div><div class="pt">Juara 1 Olimpiade Sains Nasional</div><div class="po">Tingkat Kota Prabumulih</div></div>
-        <div class="prest-card reveal d1"><span class="pm">🏆</span><div class="py">2025</div><div class="pt">Sekolah Adiwiyata Terbaik</div><div class="po">Tingkat Provinsi Sumsel</div></div>
-        <div class="prest-card reveal d2"><span class="pm">🥈</span><div class="py">2025</div><div class="pt">Juara 2 Baca Puisi FLS2N</div><div class="po">Tingkat Provinsi Sumsel</div></div>
-        <div class="prest-card reveal d3"><span class="pm">⭐</span><div class="py">2024</div><div class="pt">Akreditasi A Unggul</div><div class="po">BAN-S/M Kemendikbud RI</div></div>
-    </div>
-    </section>
-
-    <!-- ════════ GURU ════════ -->
-    <section class="guru">
-    <div style="text-align:center;margin-bottom:48px" class="reveal">
-        <div class="tag">Tenaga Pendidik</div>
-        <h2 class="sec-title">Tim <em>Pengajar</em> Kami</h2>
-        <p class="sec-sub" style="margin:0 auto">Guru-guru berpengalaman dan berdedikasi yang siap membimbing setiap siswa menuju potensi terbaiknya.</p>
-    </div>
-    <div class="guru-grid">
-        <?php if (!empty($guru_list)):
-        $gc = ['ga1','ga2','ga3','ga4','ga5'];
-        $dl = ['','d1','d2','d3','d4'];
-        foreach (array_slice($guru_list, 0, 5) as $i => $g): 
-            $isImage = (str_contains($g['avatar'], '.') || str_contains($g['avatar'], '/'));
-            $avStyle = $isImage ? "background:url('".$upload_url . $g['avatar']."') center/cover; font-size:0;" : "";
-        ?>
-        <div class="guru-card reveal <?= $dl[$i] ?>">
-        <div class="gc-av <?= $gc[$i%5] ?>" style="<?= $avStyle ?>">
-            <?= $isImage ? '' : esc($g['avatar']) ?>
-        </div>
-        <div class="gc-info">
-            <div class="gc-name"><?= esc($g['nama']) ?></div>
-            <div class="gc-role"><?= esc($g['jabatan']) ?></div>
-            <div class="gc-nip">NIP: <?= esc($g['nip']) ?></div>
-        </div>
-        </div>
-        <?php endforeach; else: ?>
-        <!-- Fallback statis -->
-        <div class="guru-card reveal">   <div class="gc-av ga1">👩‍💼</div><div class="gc-info"><div class="gc-name">Dra. Hj. Siti Rahayu</div><div class="gc-role">Kepala Sekolah</div><div class="gc-nip">NIP: 196805121992</div></div></div>
-        <div class="guru-card reveal d1"><div class="gc-av ga2">👨‍🏫</div><div class="gc-info"><div class="gc-name">Budi Santoso, S.Pd</div><div class="gc-role">Guru Kelas 6A</div><div class="gc-nip">NIP: 197203181998</div></div></div>
-        <div class="guru-card reveal d2"><div class="gc-av ga3">👩‍🏫</div><div class="gc-info"><div class="gc-name">Dewi Lestari, S.Pd</div><div class="gc-role">Guru Matematika</div><div class="gc-nip">NIP: 198504152010</div></div></div>
-        <div class="guru-card reveal d3"><div class="gc-av ga4">👩‍🏫</div><div class="gc-info"><div class="gc-name">Rina Wati, S.Pd</div><div class="gc-role">Guru Bahasa Indonesia</div><div class="gc-nip">NIP: 198901202012</div></div></div>
-        <div class="guru-card reveal d4"><div class="gc-av ga5">👨‍🏫</div><div class="gc-info"><div class="gc-name">Ahmad Fauzi, S.Pd</div><div class="gc-role">Guru PJOK</div><div class="gc-nip">NIP: 199002282015</div></div></div>
-        <?php endif; ?>
-    </div>
-    </section>
+    </script>   
 
     <!-- ════════ PPDB ════════ -->
     <section class="ppdb" id="ppdb">
@@ -389,14 +380,14 @@
         <p style="font-size:16px;color:var(--gray);line-height:1.75;margin-bottom:32px">Kami senang mendengar dari Anda. Kunjungi langsung atau hubungi kami melalui salah satu saluran di bawah ini.</p>
         <!-- Mobile quick contact -->
         <div class="mobile-cta">
-            <a href="https://wa.me/6281234567890" class="mc-btn mc-wa">💬 WhatsApp</a>
-            <a href="tel:+627131234567"           class="mc-btn mc-tel">📞 Telepon</a>
+            <a href="https://wa.me/+6282281463958" class="mc-btn mc-wa">💬 WhatsApp</a>
+            <a href="tel:+62 822-8146-3958"           class="mc-btn mc-tel">📞 Telepon</a>
         </div>
         <div class="k-items">
-            <div class="k-row"><div class="k-icon">📍</div><div><div class="k-lbl">Alamat</div><div class="k-val">Jl. Pendidikan No. 56, Prabumulih</div><div class="k-sub">Sumatera Selatan 31124, Indonesia</div></div></div>
-            <div class="k-row"><div class="k-icon">📞</div><div><div class="k-lbl">Telepon</div><div class="k-val">(0713) 123-4567</div><div class="k-sub">Senin – Jumat · 07.00 – 14.00 WIB</div></div></div>
-            <div class="k-row"><div class="k-icon">✉️</div><div><div class="k-lbl">Email</div><div class="k-val">sdnegeri56pbm@gmail.com</div><div class="k-sub">Respon dalam 1×24 jam kerja</div></div></div>
-            <div class="k-row"><div class="k-icon">📱</div><div><div class="k-lbl">WhatsApp</div><div class="k-val">0812-3456-7890</div><div class="k-sub">Chat langsung dengan TU Sekolah</div></div></div>
+            <div class="k-row"><div class="k-icon">📍</div><div><div class="k-lbl">Alamat</div><div class="k-val">H7MC+HC8, Gn. Ibul, Kec. Prabumulih Tim., Kota Prabumulih</div><div class="k-sub">Sumatera Selatan 31111, Indonesia</div></div></div>
+            <div class="k-row"><div class="k-icon">📞</div><div><div class="k-lbl">Telepon</div><div class="k-val">+62 822-8146-3958</div><div class="k-sub">Senin – Jumat · 07.00 – 14.00 WIB</div></div></div>
+            <div class="k-row"><div class="k-icon">✉️</div><div><div class="k-lbl">Email</div><div class="k-val">sdn56prabumulih@gmail.com</div><div class="k-sub">Respon dalam 1×24 jam kerja</div></div></div>
+            <div class="k-row"><div class="k-icon">📱</div><div><div class="k-lbl">WhatsApp</div><div class="k-val">+62 822-8146-3958</div><div class="k-sub">Chat langsung dengan TU Sekolah</div></div></div>
         </div>
         <div class="map-box" onclick="window.open('https://maps.google.com/?q=SD+Negeri+56+Prabumulih','_blank')">
             <div class="map-inner">
