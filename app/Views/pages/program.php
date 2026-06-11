@@ -18,25 +18,25 @@
         <p class="sec-sub">Semua informasi dan layanan sekolah kini mudah diakses secara digital oleh siswa, orang tua, dan masyarakat.</p>
     </div>
     <div class="smart-grid">
-        <a href="<?= base_url('ppdb') ?>" class="smart-card reveal">
-        <div class="smart-icon"><i class="fas fa-graduation-cap"></i></div>
-        <h3 class="smart-title">PPDB Online</h3>
-        <p class="smart-desc">Pendaftaran siswa baru online</p>
+        <a href="<?= base_url('ppdb') ?>" class="sc reveal d1" style="text-decoration:none">
+            <div class="sc-ic sci1">📊</div>
+            <div class="sc-title">PPDB Online</div>
+            <div class="sc-desc">Pendaftaran siswa baru online</div>
         </a>
-        <a href="<?= base_url('kontak') ?>" class="smart-card reveal d1">
-        <div class="smart-icon"><i class="fas fa-comments"></i></div>
-        <h3 class="smart-title">Kontak Sekolah</h3>
-        <p class="smart-desc">Hubungi layanan kami</p>
+        <a href="<?= base_url('berita') ?>" class="sc reveal d2" style="text-decoration:none">
+            <div class="sc-ic sci2">📢</div>
+            <div class="sc-title">Pengumuman</div>
+            <div class="sc-desc">Informasi & berita terbaru</div>
         </a>
-        <a href="<?= base_url('agenda') ?>" class="smart-card reveal d2">
-        <div class="smart-icon"><i class="fas fa-calendar-alt"></i></div>
-        <h3 class="smart-title">Agenda Sekolah</h3>
-        <p class="smart-desc">Kegiatan & acara mendatang</p>
+        <a href="<?= base_url('kontak') ?>" class="sc reveal d3" style="text-decoration:none">
+            <div class="sc-ic sci3">📞</div>
+            <div class="sc-title">Kontak Sekolah</div>
+            <div class="sc-desc">Hubungi layanan kami</div>
         </a>
-        <a href="<?= base_url('berita') ?>" class="smart-card reveal d3">
-        <div class="smart-icon"><i class="fas fa-newspaper"></i></div>
-        <h3 class="smart-title">Berita & Pengumuman</h3>
-        <p class="smart-desc">Informasi & berita terbaru</p>
+        <a href="<?= base_url('agenda') ?>" class="sc reveal d4" style="text-decoration:none">
+            <div class="sc-ic sci4">📅</div>
+            <div class="sc-title">Agenda & Kalender</div>
+            <div class="sc-desc">Jadwal kegiatan akademik</div>
         </a>
     </div>
     </div>

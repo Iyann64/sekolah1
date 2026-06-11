@@ -71,59 +71,5 @@
         </a>
         </div>
 
-        <!-- Kolom Kanan: Form Pesan -->
-        <div class="reveal d2">
-
-        <?php if (session()->getFlashdata('success')): ?>
-        <div class="form-ok" style="display:block;margin-bottom:20px">
-            <div class="fok-ic">✅</div>
-            <h4>Pesan Terkirim!</h4>
-            <p><?= session()->getFlashdata('success') ?></p>
-        </div>
-        <?php endif; ?>
-
-        <?php if (session()->getFlashdata('error')): ?>
-        <div style="background:#FFEBEE;border:1px solid #FFCDD2;border-left:4px solid #EF5350;border-radius:12px;padding:14px 18px;margin-bottom:20px;font-size:13px;color:#C62828">
-            ⚠️ <?= session()->getFlashdata('error') ?>
-        </div>
-        <?php endif; ?>
-
-        <div class="form-title">Kirim Pesan</div>
-
-        <form action="<?= base_url('kontak/kirim') ?>" method="POST">
-            <?= csrf_field() ?>
-            <div class="form-row">
-            <div class="fg">
-                <label>Nama Lengkap *</label>
-                <input type="text" name="nama" placeholder="Nama Anda" value="<?= old('nama') ?>" required>
-            </div>
-            <div class="fg">
-                <label>No. Telepon</label>
-                <input type="tel" name="telepon" placeholder="08xx-xxxx-xxxx" value="<?= old('telepon') ?>">
-            </div>
-            </div>
-            <div class="fg">
-            <label>Email *</label>
-            <input type="email" name="email" placeholder="email@anda.com" value="<?= old('email') ?>" required>
-            </div>
-            <div class="fg">
-            <label>Keperluan</label>
-            <select name="topik">
-                <option value="">Pilih keperluan...</option>
-                <option value="ppdb"     <?= old('topik')==='ppdb'    ? 'selected':'' ?>>Informasi PPDB</option>
-                <option value="program"  <?= old('topik')==='program' ? 'selected':'' ?>>Info Program Sekolah</option>
-                <option value="pengaduan"<?= old('topik')==='pengaduan'?'selected':'' ?>>Pengaduan / Saran</option>
-                <option value="kerjasama"<?= old('topik')==='kerjasama'?'selected':'' ?>>Kerjasama</option>
-                <option value="lainnya"  <?= old('topik')==='lainnya' ? 'selected':'' ?>>Lainnya</option>
-            </select>
-            </div>
-            <div class="fg">
-            <label>Pesan *</label>
-            <textarea name="pesan" placeholder="Tulis pesan Anda di sini..." required><?= old('pesan') ?></textarea>
-            </div>
-            <button type="submit" class="btn-send">📨 Kirim Pesan</button>
-        </form>
-        </div>
-
     </div>
     </section>
